@@ -36,7 +36,7 @@ To use ISP Kit you need to create a `Client` and a service object for the ISP se
 communicating with a specific ISP service.
 
 ```swift
-import SCAN //ensure this module is specified as a dependency in your Package.swift
+import SMP //ensure this module is specified as a dependency in your Package.swift
 
 let client = GBPClient(
     applicationID: "<GBP Application ID>",
