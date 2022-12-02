@@ -11,7 +11,7 @@ recommended you do the same. Add a dependency to the package in your own Package
     dependencies: [
         .package(url: "https://github.com/adamayoung/isp-kit.git", from: "0.1.0")
     ],
-``
+```
 
 Then add target dependencies for each of the ISP Kit targets you want to use.
 
