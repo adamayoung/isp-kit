@@ -54,3 +54,11 @@ jobs:
 
       - name: Test
         run: swift test --skip-build --parallel
+        env:
+          ACCOUNT_USER_ID: ${{ secrets.ACCOUNT_USER_ID }}
+          ACCOUNT_PASSWORD: ${{ secrets.ACCOUNT_PASSWORD }}
+          GBP_APPLICATION_ID: ${{ secrets.GBP_APPLICATION_ID }}
+          GBP_API_KEY: ${{ secrets.GBP_API_KEY }}
+          CMS_APPLICATION_ID: ${{ secrets.CMS_APPLICATION_ID }}
+          CMS_API_KEY: ${{ secrets.CMS_API_KEY }}
+
