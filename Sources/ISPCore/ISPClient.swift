@@ -2,6 +2,7 @@ import AsyncHTTPClient
 import Foundation
 import Logging
 import NIOCore
+import NIOFoundationCompat
 import NIOHTTP1
 
 open class ISPClient {
@@ -73,9 +74,8 @@ extension ISPClient {
 
         do {
             let data = try encoder.encode(input)
-            print(String(data: data, encoding: .utf8)!)
             request.headers.add(.contentType, value: "application/json")
-            request.body = .bytes(ByteBuffer(data: data))
+            request.body = .bytes(ByteBuffer(bytes: data))
         } catch let error {
             throw ISPClientError.encode(error)
         }
