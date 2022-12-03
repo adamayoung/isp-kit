@@ -47,21 +47,21 @@ final class SCANTests: XCTestCase {
         super.tearDown()
     }
 
-    func testSearchWhenSearchingForASingleEventTypeShouldReturnEventType() async throws {
-        let eventTypeID: EventTypeID = 1
+    func testSearchWhenSearchingForASingleSportShouldReturnSport() async throws {
+        let sportID: SportID = 1
         let searchRequest = FacetedSearchRequest(
-            facet: Facet(type: .eventType),
+            facet: Facet(type: .sport),
             filter: FilterQuery(
-                eventTypeIDs: [eventTypeID],
+                sportIDs: [sportID],
                 maxResults: 1
             )
         )
 
         let result = try await scan.search(searchRequest)
 
-        let sport = try XCTUnwrap(result.attachments.eventTypes?.first?.value)
+        let sport = try XCTUnwrap(result.attachments.sports?.first?.value)
 
-        XCTAssertEqual(sport.eventTypeID, eventTypeID)
+        XCTAssertEqual(sport.sportID, sportID)
     }
 
 }

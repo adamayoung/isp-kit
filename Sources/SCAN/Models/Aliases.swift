@@ -1,6 +1,6 @@
 import Foundation
 
-public typealias EventTypeID = Int
+public typealias SportID = Int
 public typealias EventID = Int
 public typealias RaceID = String
 public typealias MeetingID = String

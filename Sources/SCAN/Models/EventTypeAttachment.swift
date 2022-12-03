@@ -1,25 +1,25 @@
 import Foundation
 
-public struct EventTypeAttachment: Equatable, Codable {
+public struct SportAttachment: Equatable, Codable {
 
     public let name: String?
     public let key: String?
-    public let eventTypeID: EventTypeID
+    public let sportID: SportID
 
-    public init(name: String? = nil, key: String? = nil, eventTypeID: EventTypeID) {
+    public init(name: String? = nil, key: String? = nil, sportID: SportID) {
         self.name = name
         self.key = key
-        self.eventTypeID = eventTypeID
+        self.sportID = sportID
     }
 
 }
 
-extension EventTypeAttachment {
+extension SportAttachment {
 
     private enum CodingKeys: String, CodingKey {
         case name
         case key
-        case eventTypeID = "eventTypeId"
+        case sportID = "eventTypeId"
     }
 
 }

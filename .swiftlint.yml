@@ -23,9 +23,11 @@ identifier_name:
   max_length: 60
   excluded:
     - all
+    - avb
     - cms
     - gbp
     - id
+    - ids
     - ip
     - ips
     - key
@@ -38,6 +40,7 @@ identifier_name:
     - tla
     - uk
     - url
+    - win
 
 file_length:
   warning: 600

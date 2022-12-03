@@ -11,6 +11,7 @@ let package = Package(
     ],
 
     products: [
+        .library(name: "Sportsbook", targets: ["Sportsbook"]),
         .library(name: "SCAN", targets: ["SCAN"]),
         .library(name: "SMP", targets: ["SMP"]),
         .library(name: "CMS", targets: ["CMS"])
@@ -23,6 +24,23 @@ let package = Package(
     ],
 
     targets: [
+        .target(
+            name: "Sportsbook",
+            dependencies: [
+                "SCAN",
+                "SMP",
+                "CMS",
+                .product(name: "AsyncHTTPClient", package: "async-http-client"),
+                .product(name: "Logging", package: "swift-log")
+            ]
+        ),
+        .testTarget(
+            name: "SportsbookTests",
+            dependencies: [
+                "Sportsbook"
+            ]
+        ),
+
         .target(
             name: "SCAN",
             dependencies: [

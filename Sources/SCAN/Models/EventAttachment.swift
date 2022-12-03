@@ -5,7 +5,7 @@ public struct EventAttachment: Equatable, Codable {
     public let eventID: EventID
     public let key: String?
     public let name: String?
-    public let eventTypeID: EventTypeID
+    public let sportID: SportID
     public let competitionID: CompetitionID?
     public let countryCode: String?
     public let timezone: String?
@@ -15,14 +15,14 @@ public struct EventAttachment: Equatable, Codable {
     public let marketPrecedence: [MarketID]?
     public let onTVChannels: [String]?
 
-    public init(eventID: EventID, key: String? = nil, name: String? = nil, eventTypeID: EventTypeID,
+    public init(eventID: EventID, key: String? = nil, name: String? = nil, sportID: SportID,
                 competitionID: CompetitionID? = nil, countryCode: String? = nil, timezone: String? = nil,
                 venue: String? = nil, openDate: Date? = nil, videoAvailable: Bool? = nil,
                 marketPrecedence: [MarketID]? = nil, onTVChannels: [String]? = nil) {
         self.eventID = eventID
         self.key = key
         self.name = name
-        self.eventTypeID = eventTypeID
+        self.sportID = sportID
         self.competitionID = competitionID
         self.countryCode = countryCode
         self.timezone = timezone
@@ -41,7 +41,7 @@ extension EventAttachment {
         case eventID = "eventId"
         case key
         case name
-        case eventTypeID = "eventTypeId"
+        case sportID = "eventTypeId"
         case competitionID = "competitionId"
         case countryCode
         case timezone

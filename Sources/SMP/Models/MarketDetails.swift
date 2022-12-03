@@ -14,7 +14,7 @@ public struct MarketDetails: Equatable, Decodable, CustomStringConvertible {
     /// True if a market is currently in play, otherwise it is false.
     public let isInPlay: Bool
     /// bspMarket.
-    public let bspMarket: Bool
+    public let isBSPMarket: Bool
     /// True if live prices are available on the market.
     public let isLivePriceAvailable: Bool
     /// True if guaranteed price is available on this market.
@@ -43,7 +43,7 @@ public struct MarketDetails: Equatable, Decodable, CustomStringConvertible {
     public let rule4Deductions: [Rule4Deduction]?
 
     public init(marketId: String, marketStatus: MarketDetails.MarketStatus, isTurnInPlayEnabled: Bool, isInPlay: Bool,
-                bspMarket: Bool, isLivePriceAvailable: Bool, isGuaranteedPriceAvailable: Bool,
+                isBSPMarket: Bool, isLivePriceAvailable: Bool, isGuaranteedPriceAvailable: Bool,
                 bettingType: MarketDetails.MarketBettingType, runnerDetails: [RunnerDetails], isEachWayAvailable: Bool,
                 numberOfPlaces: Int? = nil, placeFraction: FractionalOdds? = nil,
                 legTypes: [MarketDetails.LegType]? = nil, hasBPE: Bool? = nil, hasSGM: Bool? = nil,
@@ -52,7 +52,7 @@ public struct MarketDetails: Equatable, Decodable, CustomStringConvertible {
         self.marketStatus = marketStatus
         self.isTurnInPlayEnabled = isTurnInPlayEnabled
         self.isInPlay = isInPlay
-        self.bspMarket = bspMarket
+        self.isBSPMarket = isBSPMarket
         self.isLivePriceAvailable = isLivePriceAvailable
         self.isGuaranteedPriceAvailable = isGuaranteedPriceAvailable
         self.bettingType = bettingType
@@ -81,7 +81,7 @@ extension MarketDetails {
         case marketStatus
         case isTurnInPlayEnabled = "turnInPlayEnabled"
         case isInPlay = "inplay"
-        case bspMarket
+        case isBSPMarket = "bspMarket"
         case isLivePriceAvailable = "livePriceAvailable"
         case isGuaranteedPriceAvailable = "guaranteedPriceAvailable"
         case bettingType

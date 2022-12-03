@@ -4,7 +4,7 @@ public struct MarketAttachment: Equatable, Codable {
 
     public let marketID: MarketID
     public let key: String?
-    public let eventTypeID: EventTypeID
+    public let sportID: SportID
     public let eventID: EventID
     public let upperLevelEventID: EventID?
     public let topLevelEventID: EventID?
@@ -37,7 +37,7 @@ public struct MarketAttachment: Equatable, Codable {
     public let raceNumber: String?
     public let competitionID: CompetitionID
 
-    public init(marketID: MarketID, key: String? = nil, eventTypeID: EventTypeID, eventID: EventID,
+    public init(marketID: MarketID, key: String? = nil, sportID: SportID, eventID: EventID,
                 upperLevelEventID: EventID? = nil, topLevelEventID: EventID? = nil, numberOfUpperLevels: Int? = nil,
                 raceID: RaceID? = nil, meetingID: MeetingID? = nil, marketName: String? = nil, marketTime: Date? = nil,
                 marketSuspendTime: Date? = nil, canTurnInPlay: Bool, bettingType: MarketBettingType, marketType: String,
@@ -49,7 +49,7 @@ public struct MarketAttachment: Equatable, Codable {
                 raceNumber: String? = nil, competitionID: CompetitionID) {
         self.marketID = marketID
         self.key = key
-        self.eventTypeID = eventTypeID
+        self.sportID = sportID
         self.eventID = eventID
         self.upperLevelEventID = upperLevelEventID
         self.topLevelEventID = topLevelEventID
@@ -90,7 +90,7 @@ extension MarketAttachment {
     private enum CodingKeys: String, CodingKey {
         case marketID = "marketId"
         case key
-        case eventTypeID = "eventTypeId"
+        case sportID = "eventTypeId"
         case eventID = "eventId"
         case upperLevelEventID = "upperLevelEventId"
         case topLevelEventID = "topLevelEventId"

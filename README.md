@@ -26,6 +26,17 @@ Then add target dependencies for each of the ISP Kit targets you want to use.
 )
 ```
 
+or
+
+```swift
+    targets: [
+        .target(name: "MyApp", dependencies: [
+            .product(name: "Sportsbook", package: "isp-kit")
+        ]),
+    ]
+)
+```
+
 Alternatively if you are using Xcode 11 or later you can use the Swift Package Manager integration and add a dependency
 to ISP Kit through that.
 

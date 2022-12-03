@@ -6,16 +6,16 @@ public struct CompetitionAttachment: Equatable, Codable {
     public let name: String?
     public let competitionID: CompetitionID
     public let eventID: EventID
-    public let eventTypeID: EventTypeID
+    public let sportID: SportID
     public let region: CountryCode?
 
     public init(key: String? = nil, name: String? = nil, competitionID: CompetitionID, eventID: EventID,
-                eventTypeID: EventTypeID, region: CountryCode? = nil) {
+                sportID: SportID, region: CountryCode? = nil) {
         self.key = key
         self.name = name
         self.competitionID = competitionID
         self.eventID = eventID
-        self.eventTypeID = eventTypeID
+        self.sportID = sportID
         self.region = region
     }
 
@@ -28,7 +28,7 @@ extension CompetitionAttachment {
         case name
         case competitionID = "competitionId"
         case eventID = "eventId"
-        case eventTypeID = "eventTypeId"
+        case sportID = "eventTypeId"
         case region
     }
 

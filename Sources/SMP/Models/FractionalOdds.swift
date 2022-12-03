@@ -20,3 +20,5 @@ public struct FractionalOdds: Equatable, Decodable, CustomStringConvertible {
     }
 
 }
+
+public typealias SMPFractionalOdds = FractionalOdds

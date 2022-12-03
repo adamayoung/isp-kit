@@ -85,3 +85,5 @@ extension RunnerDetails {
     }
 
 }
+
+public typealias SMPRunnerDetails = RunnerDetails

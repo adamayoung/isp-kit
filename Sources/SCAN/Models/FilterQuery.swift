@@ -3,7 +3,7 @@ import Foundation
 public struct FilterQuery: Equatable, Hashable, Codable {
 
     public let exchangeIDs: [Int]?
-    public let eventTypeIDs: [EventTypeID]?
+    public let sportIDs: [SportID]?
     public let eventIDs: [EventID]?
     public let marketIDs: [MarketID]?
     public let competitionIDs: [CompetitionID]?
@@ -34,7 +34,7 @@ public struct FilterQuery: Equatable, Hashable, Codable {
     public let numberOfWinners: [Int]?
     public let raceTypes: [String]?
 
-    public init(exchangeIDs: [Int]? = nil, eventTypeIDs: [EventTypeID]? = nil, eventIDs: [EventID]? = nil,
+    public init(exchangeIDs: [Int]? = nil, sportIDs: [SportID]? = nil, eventIDs: [EventID]? = nil,
                 marketIDs: [MarketID]? = nil, competitionIDs: [CompetitionID]? = nil,
                 productTypes: [ProductType] = .default, bspOnly: Bool? = nil, turnInPlayEnabled: Bool? = nil,
                 inPlayOnly: Bool? = nil, sgmOnly: Bool? = nil, marketBettingTypes: [MarketBettingType]? = nil,
@@ -46,7 +46,7 @@ public struct FilterQuery: Equatable, Hashable, Codable {
                 onTV: Bool? = nil, tradedVolumeFrom: Int? = nil, raceClasses: [String]? = nil,
                 numberOfWinners: [Int]? = nil, raceTypes: [String]? = nil) {
         self.exchangeIDs = exchangeIDs
-        self.eventTypeIDs = eventTypeIDs
+        self.sportIDs = sportIDs
         self.eventIDs = eventIDs
         self.marketIDs = marketIDs
         self.competitionIDs = competitionIDs
@@ -84,7 +84,7 @@ extension FilterQuery {
 
     private enum CodingKeys: String, CodingKey {
         case exchangeIDs = "exchangeIds"
-        case eventTypeIDs = "eventTypeIds"
+        case sportIDs = "eventTypeIds"
         case eventIDs = "eventIds"
         case marketIDs = "marketIds"
         case competitionIDs = "competitionIds"

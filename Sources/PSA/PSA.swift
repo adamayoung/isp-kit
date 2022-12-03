@@ -2,7 +2,7 @@ import Foundation
 import Logging
 import StarsCore
 
-public final class PSA {
+public final class PSA: AccountDataSource {
 
     private static let sessionPath = "/api/v1-preview/auth/session"
 

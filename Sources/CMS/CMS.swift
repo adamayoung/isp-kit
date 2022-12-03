@@ -2,7 +2,7 @@ import CMSCore
 import Foundation
 import Logging
 
-public final class CMS {
+public final class CMS: ContentManagementDataSource {
 
     private static let nodesPath = "/nodes"
 

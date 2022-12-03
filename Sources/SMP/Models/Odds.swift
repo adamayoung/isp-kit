@@ -32,3 +32,5 @@ public struct Odds: Equatable, Decodable, CustomStringConvertible {
     }
 
 }
+
+public typealias SMPOdds = Odds

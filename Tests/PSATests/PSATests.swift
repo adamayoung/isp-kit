@@ -45,12 +45,12 @@ final class PSATests: XCTestCase {
         super.tearDown()
     }
 
-    func testSearchWhenSearchingForASingleEventTypeShouldReturnEventType() async throws {
-        let credential = Credential.mock
-
-        let userSession = try await psa.signIn(with: credential)
-
-        XCTAssertEqual(userSession.account.userId, credential.userId)
-    }
+//    func testSearchWhenSearchingForASingleEventTypeShouldReturnEventType() async throws {
+//        let credential = Credential.mock
+//
+//        let userSession = try await psa.signIn(with: credential)
+//
+//        XCTAssertEqual(userSession.account.userId, credential.userId)
+//    }
 
 }

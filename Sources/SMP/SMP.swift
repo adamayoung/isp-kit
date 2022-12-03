@@ -2,7 +2,7 @@ import Foundation
 import GBPCore
 import Logging
 
-public final class SMP {
+public final class SMP: MarketPricesDataSource {
 
     private static let marketPricesPath = "/www/sports/fixedodds/readonly/v1/getMarketPrices?priceHistory=1"
 

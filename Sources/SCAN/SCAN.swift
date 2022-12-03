@@ -2,7 +2,7 @@ import Foundation
 import GBPCore
 import Logging
 
-public final class SCAN {
+public final class SCAN: CatalogueDataSource {
 
     private static let searchPath = "/www/sports/navigation/facet/v1.0/search"
 

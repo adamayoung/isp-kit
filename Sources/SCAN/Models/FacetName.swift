@@ -3,7 +3,7 @@ import Foundation
 public enum FacetName: String, Equatable, Hashable, Codable {
 
     case event = "EVENT"
-    case eventType = "EVENT_TYPE"
+    case sport = "EVENT_TYPE"
     case marketType = "MARKET_TYPE"
     case venue = "VENUE"
     case marketBettingType = "MARKET_BETTING_TYPE"

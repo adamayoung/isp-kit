@@ -42,3 +42,5 @@ extension Rule4Deduction {
     }
 
 }
+
+public typealias SMPRule4Deduction = Rule4Deduction
