@@ -1,0 +1,2161 @@
+directive @Positive(message: String = "graphql.validation.Positive.message") on ARGUMENT_DEFINITION | VARIABLE_DEFINITION
+
+type AmericanFootball {
+  """Get a list of AmericanFootball fixtures information for the chosen ids"""
+  fixture(ids: [ID!]!): [AmericanFootballFixture]
+}
+
+type AmericanFootballClock {
+  """Current period of the fixture"""
+  period: AmericanFootballPeriod
+
+  """Time elapsed for the current period (in seconds)"""
+  timeElapsed: Int
+
+  """Time remaining for the current period (in seconds)"""
+  timeRemaining: Int
+}
+
+type AmericanFootballFixture {
+  """Canonical ID of the match"""
+  id: ID!
+
+  """Score of the current period"""
+  score: AmericanFootballScore
+
+  """Clock information"""
+  clock: AmericanFootballClock
+
+  """Scores by quarter"""
+  quarterScores: [AmericanFootballQuarterScore]
+}
+
+enum AmericanFootballPeriod {
+  PERIOD_1
+  END_PERIOD_1
+  PERIOD_2
+  END_PERIOD_2
+  PERIOD_3
+  END_PERIOD_3
+  PERIOD_4
+  END_PERIOD_4
+  OVERTIME
+  END_OVERTIME
+  END
+}
+
+type AmericanFootballQuarterScore {
+  """Score of the associated quarter"""
+  score: AmericanFootballScore
+  period: AmericanFootballPeriod
+}
+
+type AmericanFootballScore {
+  """Home team score"""
+  home: Int!
+
+  """Away team score"""
+  away: Int!
+}
+
+type AttackIncident {
+  """Attack type (See AttackIncidentType)"""
+  attackType: AttackIncidentType!
+
+  """Team side"""
+  side: FootballSide!
+}
+
+enum AttackIncidentType {
+  DANGEROUS_ATTACK
+}
+
+type Basketball {
+  """Get a list of Basketball fixtures information for the chosen ids"""
+  fixture(ids: [ID!]!): [BasketballFixture]
+}
+
+type BasketballClock {
+  """Current period of the fixture"""
+  period: BasketballPeriod
+
+  """Current segment of the fixture"""
+  segment: BasketballSegment
+
+  """Time elapsed for the current period (in seconds)"""
+  timeElapsed: Int
+
+  """Time remaining for the current period (in seconds)"""
+  timeRemaining: Int
+}
+
+type BasketballFixture {
+  """Canonical ID of the match"""
+  id: ID!
+
+  """Score of the current period"""
+  score: BasketballScore
+
+  """Clock information"""
+  clock: BasketballClock
+
+  """Scores by period"""
+  periodScores: [BasketballPeriodScore]
+}
+
+enum BasketballPeriod {
+  UNKNOWN_PERIOD
+  PERIOD_1
+  END_PERIOD_1
+  PERIOD_2
+  END_PERIOD_2
+  PERIOD_3
+  END_PERIOD_3
+  PERIOD_4
+  END_PERIOD_4
+  OVERTIME
+  END_OVERTIME
+  END
+}
+
+type BasketballPeriodScore {
+  """Score of the period associated"""
+  score: BasketballScore
+
+  """Current period of the fixture"""
+  period: BasketballPeriod
+
+  """Current segment of the fixture"""
+  segment: BasketballSegment
+}
+
+type BasketballScore {
+  """Home team score"""
+  home: Int!
+
+  """Away team score"""
+  away: Int!
+}
+
+enum BasketballSegment {
+  UNKNOWN_SEGMENT
+  H1
+  H2
+  Q1
+  Q2
+  Q3
+  Q4
+  OT
+}
+
+type Broadcaster {
+  """The name of the broadcaster"""
+  name: String!
+
+  """The date this broadcast starts"""
+  startAt: DateTime!
+
+  """Logo image for the broadcaster"""
+  logo: Image
+}
+
+type Broadcasts {
+  """Fixture's unique identifier"""
+  id: ID!
+
+  """DataViz information"""
+  viz: DataViz
+
+  """Live video information"""
+  liveVideo: LiveVideo
+
+  """List of broadcasters available (affected by locale)"""
+  broadcasters: [Broadcaster!]
+}
+
+type CardIncident {
+  """Type of card"""
+  cardType: CardIncidentType!
+
+  """Team side"""
+  side: FootballSide!
+
+  """The player that received the card"""
+  player: FootballPlayer
+}
+
+enum CardIncidentType {
+  YELLOW
+  YELLOW_RED
+  RED
+}
+
+enum ContentView {
+  mstats
+  undefined
+}
+
+type Country {
+  """The flag of the country"""
+  flag: Image
+
+  """The name of the country"""
+  name: String
+
+  """The ISO-3 code of the country"""
+  code: String
+}
+
+type Cricket {
+  """Get a list of Cricket fixtures information for the chosen ids"""
+  fixture(ids: [ID!]!): [CricketFixture]
+}
+
+type CricketFixture {
+  """Canonical ID of the match"""
+  id: ID!
+
+  """Score of the current fixture"""
+  score: CricketScore
+
+  """Current team batting"""
+  currentTeamBatting: TeamSide
+
+  """Current time"""
+  currentTime: CricketTime
+}
+
+type CricketInning {
+  """Number of runs made by the team"""
+  runs: Int
+
+  """Number of wickets lost by the batting team"""
+  wickets: Int
+
+  """Inning number"""
+  inningNumber: Int
+}
+
+type CricketScore {
+  """Home team runs and wickets per inning"""
+  home: [CricketInning]
+
+  """Away team runs and wickets per inning"""
+  away: [CricketInning]
+}
+
+type CricketTime {
+  """Current inning being played"""
+  inning: Int
+
+  """Number of the current over"""
+  over: Int
+}
+
+type Darts {
+  """Get a list of Darts match information for the chosen ids"""
+  match(ids: [ID!]!): [DartsMatch]
+}
+
+type DartsMatch {
+  """Betfair ID of the match"""
+  id: ID!
+
+  """Date of the start of the match"""
+  scheduledStartTime: DateTime!
+
+  """Whether the match is a 'Best of X Legs' or 'Best of X Sets'"""
+  type: DartsMatchType
+
+  """
+  Number of sets to be played as best of - only available if type is 'SETS'
+  """
+  numberOfSets: Int
+
+  """
+  Number of legs to be played as best of - only available if type is 'LEGS'
+  """
+  numberOfLegs: Int
+
+  """Information about team A"""
+  teamA: DartsTeam!
+
+  """Information about team B"""
+  teamB: DartsTeam!
+
+  """Score of the match"""
+  score: DartsMatchScore
+}
+
+type DartsMatchLegsScore {
+  """
+  The set number this score corresponds to - only available for previousSetLegScores
+  """
+  setNumber: Int
+
+  """Team A leg score"""
+  teamAScore: Int!
+
+  """Team B leg score"""
+  teamBScore: Int!
+}
+
+union DartsMatchScore = DartsMatchLegsScore | DartsMatchSetsScore
+
+type DartsMatchSetsScore {
+  """Team A set score"""
+  teamAScore: Int!
+
+  """Team B set score"""
+  teamBScore: Int!
+
+  """Current set leg score"""
+  currentSetLegScore: DartsMatchLegsScore!
+
+  """Leg Scores from previous sets"""
+  previousSetsLegScores: [DartsMatchLegsScore!]
+}
+
+enum DartsMatchType {
+  LEGS
+  SETS
+}
+
+type DartsPlayer {
+  """Name of the player"""
+  name: String!
+}
+
+type DartsTeam {
+  """Players"""
+  players: [DartsPlayer!]!
+}
+
+type DataViz {
+  """Get a URL for this player based on the options selected"""
+  player(width: Int, height: Int, allowPopup: Boolean, statsToggle: StatsToggle, contentView: ContentView, contentOnly: Boolean): Url!
+}
+
+"""An RFC-3339 compliant DateTime Scalar"""
+scalar DateTime
+
+type Distance {
+  """Total distance in furlongs"""
+  totalFurlongs: Float!
+
+  """Total distance in meters"""
+  totalMeters: Float!
+
+  """Distance rounded down to the nearest unit in miles"""
+  miles: Float!
+
+  """Distance rounded down to the nearest unit in furlongs"""
+  furlongs: Float!
+
+  """Distance rounded in yards"""
+  yards: Float!
+}
+
+type Football {
+  """Get a list of Fixture information for the chosen ids"""
+  fixture(ids: [ID!]!): [FootballFixture]
+
+  """Get a list of competition information for the chosen ids"""
+  competition(ids: [ID!]!): [FootballCompetition]
+}
+
+type FootballCompetition {
+  """Competition unique identifier"""
+  id: ID
+
+  """"Competition logo"""
+  logo: Image
+
+  """Competition start date"""
+  startDate: DateTime
+
+  """Competition end date"""
+  endDate: DateTime
+
+  """List of Competition stages"""
+  stages: [FootballCompetitionStage!]
+}
+
+type FootballCompetitionStage {
+  """Date of the last update for this stage"""
+  lastUpdated: DateTime
+
+  """Stage name"""
+  name: String!
+
+  """Stage start date"""
+  startDate: DateTime
+
+  """Stage end date"""
+  endDate: DateTime
+
+  """List of team standings in the stage"""
+  standings: [FootballTeamStanding!]
+}
+
+type FootballDuration {
+  """Type of period"""
+  period: FootballPeriod
+
+  """The status of the period being played"""
+  status: FootballPeriodStatus!
+
+  """The clock of the fixture"""
+  clock: Instant
+
+  """Minutes added to the end of the period"""
+  stoppageMinutes: Int
+}
+
+type FootballFixture {
+  """Fixture unique identifier """
+  id: ID!
+
+  """Home team information"""
+  home: FootballTeam!
+
+  """Away team information"""
+  away: FootballTeam!
+
+  """Competition information"""
+  competition: FootballCompetition
+
+  """Stage information"""
+  stage: FootballCompetitionStage
+
+  """Standing information for the home team"""
+  homeStanding: FootballTeamStanding
+
+  """Standing information for the away team"""
+  awayStanding: FootballTeamStanding
+
+  """Information about Broadcasters for the fixture"""
+  broadcasts: Broadcasts
+
+  """The time that the fixture was due to start"""
+  scheduledAt: DateTime!
+
+  """The time that the fixture has started"""
+  startedAt: DateTime
+
+  """The score of the current fixture in the first half"""
+  firstLegScore: FootballScore
+
+  """The current score of the fixture"""
+  score: FootballScore
+
+  """The combination of the different goal types to get the final score"""
+  aggregateLegScore: FootballScore
+
+  """
+  Information about the clock of the fixture (stoppage minutes, period, status and others)
+  """
+  duration: FootballDuration
+
+  """List of incidents in the fixture"""
+  incidents: [FootballIncident!]
+
+  """Information about penalty shootout if the fixture has it"""
+  penaltyShootout: PenaltyShootout
+
+  """Information about previous fixtures for each of the teams"""
+  recentForm: FootballPastFixture
+
+  """
+  Information about previous confrontations between the home and away teams
+  """
+  head2head: FootballPastFixture
+
+  """Information about the stats for each team per period"""
+  stats(periods: [PeriodDetails!]!): [FootballStats]
+
+  """Status of the fixture"""
+  status: Status
+}
+
+type FootballGameStats {
+  """The possession value"""
+  possession: Int
+
+  """Number of corners"""
+  corners: Int
+
+  """Number of yellow cards"""
+  yellowCards: Int
+
+  """Number of red cards"""
+  redCards: Int
+
+  """Number of offsides"""
+  offsides: Int
+
+  """Number of fouls"""
+  fouls: Int
+
+  """Number of throw ins"""
+  throwIns: Int
+
+  """Number of free kicks"""
+  freeKicks: Int
+
+  """Number of goal kicks"""
+  goalKicks: Int
+
+  """Number of blocked shots"""
+  blockedShots: Int
+
+  """Number of dangerous attacks"""
+  dangerousAttacks: Int
+
+  """Number of shots on target"""
+  shotsOnTarget: Int
+
+  """Number of shots off target"""
+  shotsOffTarget: Int
+
+  """Number of goals"""
+  goals: Int
+}
+
+type FootballIncident {
+  """Time the incident occured"""
+  clock: Instant
+
+  """Period the incident occured"""
+  period: FootballPeriod
+
+  """Period status when the indcident occured"""
+  periodStatus: FootballPeriodStatus!
+
+  """Information about the incident"""
+  details: FootballIncidentDetails!
+}
+
+union FootballIncidentDetails = GoalIncident | CardIncident | SubstitutionIncident | PenaltyIncident | PenaltyShootoutIncident | PeriodIncident | ShotIncident | SetPieceIncident | FoulIncident | AttackIncident
+
+enum FootballOutcome {
+  WIN
+  DRAW
+  LOSE
+}
+
+type FootballPastFixture {
+  """Information about past fixtures for the home team"""
+  home: [RelativeFixtureResult!]
+
+  """Information about past fixtures for the away team"""
+  away: [RelativeFixtureResult!]
+}
+
+enum FootballPeriod {
+  REGULAR
+  EXTRA
+}
+
+enum FootballPeriodStatus {
+  PRE_MATCH
+  HALF
+  FULL
+  INPLAY_FIRST_HALF
+  INPLAY_SECOND_HALF
+  PENALTY_SHOOTOUT
+  END
+}
+
+type FootballPlayer {
+  """Player unique identifier"""
+  id: ID!
+
+  """Name of the player"""
+  name: String!
+
+  """Shirt number of the player"""
+  shirtNumber: Int
+
+  """The position of the player"""
+  position: FootballPlayerPosition
+
+  """Text describing the player position"""
+  positionDescription: String
+
+  """The starting status of the player"""
+  startingType: FootballPlayerStartingType
+}
+
+enum FootballPlayerPosition {
+  GOALKEEPER
+  DEFENDER
+  MIDFIELDER
+  FORWARD
+}
+
+enum FootballPlayerStartingType {
+  LINEUP
+  BENCH
+  NOT_AVAILABLE
+}
+
+type FootballScore {
+  """Home team score"""
+  home: Int!
+
+  """Away team score"""
+  away: Int!
+}
+
+enum FootballSide {
+  HOME
+  AWAY
+}
+
+type FootballSquad {
+  """Manager name"""
+  manager: String
+
+  """List of players of the squad"""
+  players: [FootballPlayer!]
+}
+
+type FootballStats {
+  """The type of period"""
+  period: FootballPeriod
+
+  """Status of the period"""
+  periodStatus: FootballPeriodStatus!
+
+  """Statistics for the home team"""
+  home: FootballGameStats
+
+  """Statistics for the away team"""
+  away: FootballGameStats
+}
+
+type FootballTeam {
+  """Team name"""
+  name: String!
+
+  """Color of the team"""
+  color: String
+
+  """Team logo"""
+  crest: Image
+
+  """Information about the squad"""
+  squad: FootballSquad
+}
+
+type FootballTeamStanding {
+  """Team rank information"""
+  rank: Int!
+
+  """Nr of games played"""
+  gamesPlayed: Int!
+
+  """Nr of wins"""
+  win: Int!
+
+  """Nr of losses"""
+  loss: Int!
+
+  """Nr of draws"""
+  draw: Int!
+
+  """Nr of points"""
+  points: Int!
+
+  """Goals difference information"""
+  goalsDifference: Int!
+
+  """Team information"""
+  team: FootballTeam!
+}
+
+type FoulIncident {
+  """Foul type (See FoulIncidentType)"""
+  foulType: FoulIncidentType!
+
+  """Team side"""
+  side: FootballSide!
+
+  """Player involved in the incident"""
+  player: FootballPlayer
+}
+
+enum FoulIncidentType {
+  FOUL
+  OFFSIDE
+}
+
+type FractionalOdds {
+  numerator: Int!
+  denominator: Int!
+}
+
+type GoalIncident {
+  """Type of goal (See GoalIncidentType)"""
+  goalType: GoalIncidentType!
+
+  """Team side"""
+  side: FootballSide!
+
+  """Player that scored the goal"""
+  goalScorer: FootballPlayer
+
+  """Player that made the assist for goal (if applicable)"""
+  assist: FootballPlayer
+}
+
+enum GoalIncidentType {
+  NORMAL
+  OWN
+  PENALTY
+  POSSIBLE
+  CANCELLED
+}
+
+enum Going {
+  """Turf Surface"""
+  GOOD_SOFT
+
+  """Turf Surface"""
+  FIRM
+
+  """Turf Surface"""
+  GOOD
+
+  """Turf Surface"""
+  HARD
+
+  """Turf Surface"""
+  GOOD_FIRM
+
+  """Turf Surface"""
+  SOFT
+
+  """Turf Surface"""
+  HEAVY
+
+  """Turf Surface"""
+  DEAD
+
+  """Turf Surface"""
+  YIELDING
+
+  """All Weather Surface"""
+  STD_SLOW
+
+  """Turf Surface"""
+  FAST
+
+  """Turf Surface"""
+  STD
+
+  """Turf Surface"""
+  STD_FAST
+
+  """Turf Surface"""
+  SLOW
+
+  """Turf Surface"""
+  FROZEN
+
+  """Turf Surface"""
+  WET_FAST
+
+  """Turf Surface"""
+  STANDARD
+
+  """Turf Surface"""
+  SLOPPY
+
+  """Turf Surface"""
+  MUDDY
+}
+
+type Greyhound {
+  """The full name of the greyhound"""
+  name: String!
+
+  """The full name of the greyhound's sire"""
+  sireName: String!
+
+  """The full name of the greyhound's dam"""
+  damName: String!
+
+  """The age of the greyhound"""
+  age: Int!
+
+  """The colour of the greyhound"""
+  color: GreyhoundsColor!
+
+  """The gender of the greyhound. """
+  sex: GreyhoundsSex!
+
+  """Performance of current race. Only availble after results published"""
+  performance: GreyhoundPerformance
+
+  """
+  List of previous greyhound performances. If the argument is not provided, the size of the list returned will be the default (5)
+  """
+  pastPerformances(number: Int = 5): [GreyhoundPerformance!]
+}
+
+type GreyhoundPerformance {
+  """Runner details for the race"""
+  details: GreyhoundsRunnerDetails!
+
+  """The position of the greyhound in this race."""
+  position: Int!
+
+  """
+  The distance the greyhound finished behind the one in front of it. (Distance will be 0.00 in the event of first place)
+  """
+  distanceBeaten: Float
+
+  """The weight of the greyhound"""
+  weight: Float
+
+  """
+  The official starting price of the greyhound in this race (the numerator).
+  """
+  startingPrice: Float
+
+  """Betfair starting price"""
+  bsp: Float
+
+  """Race details, populated only on pastPerformances"""
+  race: GreyhoundsRaceDetails
+
+  """The official run time of the greyhound in this race"""
+  runTime: Float
+
+  """Boolean to check if the greyhound won the race"""
+  won: Boolean!
+}
+
+type Greyhounds {
+  """Get race informations for the chosen id"""
+  race(ids: [ID!]!): [GreyhoundsRace]
+
+  """
+  Get a list of runners information for the chosen runner ids that ran on the race provided
+  """
+  runner(raceId: ID!, runnerIds: [ID!]): [GreyhoundsRunner]
+
+  """Get a list of meeting information for the provided ids"""
+  meeting(ids: [ID!]!): [GreyhoundsMeeting] @deprecated(reason: "Use 'meetingExtended' instead.")
+
+  """Get a list of meeting information for the provided ids"""
+  meetingExtended(ids: [ID!]!): [GreyhoundsMeetingExtended]
+}
+
+enum GreyhoundsColor {
+  UNKNOWN
+  BLACK
+  FAWN
+  WHITE_BRINDLE
+  BRINDLE
+  BLUE
+  WHITE_BLACK
+  BLACK_WHITE
+  DARK_BRINDLE
+  BLUE_BRINDLE
+  WHITE_BLUE
+  BRINDLE_WHITE
+  BLUE_WHITE
+  WHITE_FAWN
+  FAWN_WHITE
+  BLUE_FAWN
+  WHITE_BLUE_BRINDLE
+  LIGHT_BRINDLE
+  BLUE_BRINDLE_WHITE
+  LIGHT_FAWN
+  WHITE_DARK_BRINDLE
+  WHITE_BLUE_FAWN
+  DARK_BRINDLE_WHITE
+  WHITE
+  BLUE_FAWN_WHITE
+  WHITE_BLACK_BLUE
+  BLACK_BRINDLE
+  LIGHT_BRINDLE_WHITE
+  FAWN_BRINDLE
+  DARK
+  WHITE_FAWN_BLACK
+  DARK_FAWN_WHITE
+  WHITE_FAWN_BRINDLE
+  WHITE_TRACK_BRINDLE
+  RED_BRINDLE
+  LIGHT_FAWN_WHITE
+  DARK_FAWN
+  RED_FAWN
+  FAWN_BRINDLE_WHITE
+}
+
+type GreyhoundsMeeting {
+  """Unique identifier for the meeting"""
+  id: ID!
+
+  """Date the meeting is taking place"""
+  date: DateTime!
+
+  """Country the meeting is taking place in ISO 3166 Alpha-2 format"""
+  country: String!
+
+  """The flag of the country the meeting is taking place"""
+  countryFlag: Image
+
+  """Meeting short name of the track"""
+  venue: String!
+}
+
+type GreyhoundsMeetingExtended {
+  """Unique identifier for the meeting"""
+  id: ID!
+
+  """Date the meeting is taking place"""
+  date: DateTime!
+
+  """Country the meeting is taking place in ISO 3166 Alpha-2 format"""
+  country: String!
+
+  """The flag of the country the meeting is taking place"""
+  countryFlag: Image
+
+  """Meeting short name of the track"""
+  venue: String!
+
+  """The races of the meeting"""
+  races(ids: [ID!]): [GreyhoundsRace]
+}
+
+type GreyhoundsRace {
+  """Unique identifier for the race"""
+  id: ID!
+
+  """Details about the race"""
+  details: GreyhoundsRaceDetails!
+
+  """Verdict on this specific race"""
+  verdict: String
+
+  """List of information about runners (null argument returns all runners)"""
+  runners(ids: [ID!]): [GreyhoundsRunner]
+
+  """State of this race"""
+  state: GreyhoundsRaceState
+}
+
+type GreyhoundsRaceDetails {
+  """Information about the meeting the race is in"""
+  meeting: GreyhoundsMeeting!
+
+  """The name of the course"""
+  name: String!
+
+  """The time that the race was due to start at GMT"""
+  scheduledTime: DateTime!
+
+  """The race distance in decimal furlongs"""
+  distance: Float!
+
+  """The type of racing of the race"""
+  type: GreyhoundsRaceType!
+
+  """The grade-class of this race"""
+  raceClass: String
+
+  """The money prize of this race"""
+  prizeMoney: Int!
+
+  """Number of Active Runners for this race"""
+  numberOfRunners: Int
+}
+
+type GreyhoundsRaceState {
+  """Id of the state"""
+  id: Int!
+
+  """Name of the state"""
+  name: String!
+}
+
+enum GreyhoundsRaceType {
+  UNKNOWN
+  FLAT
+  HURDLE
+}
+
+type GreyhoundsRunner {
+  """The unique identifier for this runner"""
+  id: ID!
+
+  """The detailed information for this runner"""
+  details: GreyhoundsRunnerDetails
+
+  """Position prediction"""
+  pick: Int!
+
+  """The runner past form over the last two seasons in summary"""
+  form: String
+
+  """Comment summing up the prospect for the greyhound in this race"""
+  comments: String
+
+  """Rating awarded that expresses the chance on a scale of 1 to 5"""
+  ratingStars: Int!
+
+  """Forecast odds of the runner"""
+  oddsForecast: OddsForecast
+
+  """Win percentage of the trainer"""
+  trainerRecentForm: Float
+
+  """Personal Information about the runner"""
+  greyhound: Greyhound!
+}
+
+type GreyhoundsRunnerDetails {
+  """The current Status of the runner"""
+  status: GreyhoundsRunnerStatus!
+
+  """Image of the blanket of the runner"""
+  blanket: Image
+
+  """The trap this greyhound is set to run from"""
+  trap: Int!
+
+  """Position prediction of the runner"""
+  positionPrediction: Int
+
+  """The full name of the greyhound's trainer"""
+  trainerName: String!
+
+  """The full name of the greyhound's owner"""
+  ownerName: String
+}
+
+enum GreyhoundsRunnerStatus {
+  UNKNOWN
+  RUNNER
+  NON_RUNNER
+  DROPPED_OUT
+}
+
+enum GreyhoundsSex {
+  UNKNOWN
+  DOG
+  BITCH
+}
+
+type Horse {
+  """The full name of the horse"""
+  name: String!
+
+  """Where the horse was bred"""
+  bred: String
+
+  """The name of the sire"""
+  sireName: String!
+
+  """The name of the dam"""
+  damName: String!
+
+  """The name of the dam's sire"""
+  damSireName: String
+
+  """The age of the horse based on official birth date."""
+  age: Int!
+
+  """The colour of the horse"""
+  color: HorseColor!
+
+  """The original code colour of the horse"""
+  colorCode: String
+
+  """The gender of the horse"""
+  sex: HorseSex!
+
+  """The original gender code of the horse"""
+  sexCode: String!
+
+  """Performance of current race. Only availble after results published"""
+  performance: HorsePerformance
+
+  """
+  List of past performance of this horse. If the argument is not provided, the size of the list returned will be the default (5)
+  """
+  pastPerformances(number: Int = 5): [HorsePerformance!]
+}
+
+enum HorseColor {
+  BAY
+  CHESTNUT
+  GREY
+  BROWN
+  BLACK
+  ROAN
+  SKEWBALD
+  DARK_BAY
+  GREY_ROAN
+  BROWN_BAY
+  DARK_BROWN
+  BROWN_BLACK
+  DARK_CHESTNUT
+  LIGHT_BAY
+  BAY_GREY
+  WHITE
+  GREY_BROWN
+  GREY_BAY
+  GREY_CHESTNUT
+  PALOMINO
+  BROW_GREY
+  LIGHT_CHESTNUT
+  BLACK_BAY
+  GREY_BLACK
+  DARK_LIVER
+  UNKNOWN
+}
+
+type HorsePerformance {
+  """Details information about th horse"""
+  details: RunnerDetails!
+
+  """The age of the horse on the day of the race"""
+  age: Int
+
+  """
+  The decimal value for the number of lengths the horse was behind the horse that finished in front of it
+  """
+  distanceBeaten: Float
+
+  """
+  "The textual summary for the number of lengths the horse was behind the horse that finished in front of it
+  """
+  distanceBeatenStatus: String
+
+  """The official finishing position of the horse"""
+  positionOfficial: Int
+
+  """The order in which the horse passed the winning post """
+  positionPastPost: Int
+
+  """Populated if the horse failed to complete or was disqualified"""
+  positionStatus: PositionStatus
+
+  """The price the horse was matched during the race on Betfair"""
+  ip: Ip
+
+  """The price that the horse was at the start of the race"""
+  isp: Isp
+
+  """Race information (Populated only on pastPerformances)"""
+  race: PastRace
+
+  """Boolean indicating if the horse won the race"""
+  won: Boolean!
+
+  """Comment on the horse's performance"""
+  performanceComment: String
+
+  """The betfair exchange advantage"""
+  bspAdvantage: Float
+
+  """The horse's official rating"""
+  officialRating: Int
+}
+
+type HorseRacing {
+  """Get race informations for the chosen id"""
+  race(ids: [ID!]!): [Race]
+
+  """
+  Get a list of runners information for the chosen runner ids that ran on the race provided
+  """
+  runner(raceId: ID!, runnerIds: [ID!]): [Runner]
+
+  """Get a list of meeting information for the provided ids"""
+  meeting(ids: [ID!]!): [Meeting] @deprecated(reason: "Use 'meetingExtended' instead.")
+
+  """Get a list of meeting information for the provided ids"""
+  meetingExtended(ids: [ID!]!): [MeetingExtended]
+}
+
+enum HorseSex {
+  COLT
+  GELDING
+  HORSE
+  FILLY
+  MARE
+  RIG
+  UNKNOWN
+}
+
+type IceHockey {
+  """Get a list of IceHockey fixtures information for the chosen ids"""
+  fixture(ids: [ID!]!): [IceHockeyFixture]
+}
+
+type IceHockeyClock {
+  """Current period of the fixture"""
+  period: IceHockeyPeriod
+
+  """Time elapsed for the current period (in seconds)"""
+  timeElapsed: Int
+
+  """Time remaining for the current period (in seconds)"""
+  timeRemaining: Int
+}
+
+type IceHockeyFixture {
+  """Canonical ID of the match"""
+  id: ID!
+
+  """Score of the current period"""
+  score: IceHockeyScore
+
+  """Clock information"""
+  clock: IceHockeyClock
+
+  """Scores by period"""
+  periodScores: [IceHockeyPeriodScore]
+}
+
+enum IceHockeyPeriod {
+  PERIOD_1
+  END_PERIOD_1
+  PERIOD_2
+  END_PERIOD_2
+  PERIOD_3
+  END_PERIOD_3
+  OVERTIME
+  END_OVERTIME
+  PENALTIES
+  END
+}
+
+type IceHockeyPeriodScore {
+  """Score of the period associated"""
+  score: IceHockeyScore
+  period: IceHockeyPeriod
+}
+
+type IceHockeyScore {
+  """Home team score"""
+  home: Int!
+
+  """Away team score"""
+  away: Int!
+}
+
+type Image {
+  """Url for a vector type image"""
+  vector: Url
+
+  """Url for a small size image"""
+  small: Url
+
+  """Url for a medium size image"""
+  medium: Url
+
+  """Url for a large size image"""
+  large: Url
+}
+
+type Instant {
+  minute: Int!
+  second: Int!
+  roundMinute: Int!
+}
+
+type Ip {
+  """The highest price the horse was matched during the race on Betfair"""
+  max: Float!
+
+  """The lowest price the horse was matched during the race on Betfair"""
+  min: Float!
+}
+
+type Isp {
+  """The lowest price the horse was matched during the race on Betfair"""
+  decimal: Float
+
+  """The price that the horse was at the start of the race as a fraction"""
+  fractional: FractionalOdds
+
+  """An indicator as to whether the horse was favourite"""
+  favourite: Boolean
+
+  """
+  The decimal price that the horse was at the start of the race on Betfair to win
+  """
+  betfairWin: Float
+
+  """
+  The decimal price that the horse was at the start of the race on Betfair to place
+  """
+  betfairPlace: Float
+}
+
+type LiveVideo {
+  """The date this broadcast starts"""
+  startAt: DateTime!
+
+  """The date this broadcast ends"""
+  endAt: DateTime
+
+  """Get a URL for this player based on the options selected"""
+  player(width: Int, height: Int, allowPopup: Boolean): Url!
+}
+
+type Meeting {
+  """Unique identifier for the meeting"""
+  id: ID!
+
+  """Date the meeting is taking place"""
+  date: DateTime!
+
+  """Country the meeting is taking place in ISO 3166 Alpha-2 format"""
+  country: String!
+
+  """The flag image of the country the meeting is taking place"""
+  countryFlag: Image
+
+  """The full name of the course where the meeting is taking place"""
+  venue: String!
+
+  """The type of surface that is raced on at the course"""
+  surface: Surface
+
+  """The going of the race"""
+  going: Going
+
+  """The going code of the race"""
+  goingCode: String
+}
+
+type MeetingExtended {
+  """Unique identifier for the meeting"""
+  id: ID!
+
+  """Date the meeting is taking place"""
+  date: DateTime!
+
+  """Country the meeting is taking place in ISO 3166 Alpha-2 format"""
+  country: String!
+
+  """The flag image of the country the meeting is taking place"""
+  countryFlag: Image
+
+  """The full name of the course where the meeting is taking place"""
+  venue: String!
+
+  """The type of surface that is raced on at the course"""
+  surface: Surface
+
+  """The going of the race"""
+  going: Going
+
+  """The going code of the race"""
+  goingCode: String
+
+  """The races of the meeting"""
+  races(ids: [ID!]): [Race]
+}
+
+enum MeetingStatus {
+  ABANDONED
+  INSPECTION
+  DELAYED
+  TO_TAKE_PLACE
+  COMPLETED
+  IN_PROGRESS
+}
+
+type OddsForecast {
+  """Decimal odd forecast"""
+  decimal: Float!
+}
+
+type PastRace {
+  """Details information of the race"""
+  details: RaceDetails!
+
+  """The full name of the course the race took place"""
+  venue: String!
+
+  """Country the meeting is taking place in ISO 3166 Alpha-2 format"""
+  country: String!
+}
+
+type PenaltyIncident {
+  """Type of penalty (See PenaltyIncidentType)"""
+  penaltyType: PenaltyIncidentType!
+
+  """Team side"""
+  side: FootballSide!
+}
+
+enum PenaltyIncidentType {
+  AWARDED
+  MISSED
+}
+
+type PenaltyScore {
+  """The number of the penalty in the sequence that happened"""
+  penaltyNumber: Int
+
+  """The team that score the penalty"""
+  side: FootballSide!
+
+  """Shot result (Score or Miss)"""
+  shotResult: PenaltyStatus!
+}
+
+type PenaltyShootout {
+  """First team to shoot"""
+  firstTeamToShoot: FootballSide
+
+  """Description of the penalty format"""
+  penaltyFormat: String
+
+  """Next team to shoot"""
+  nextTeamToShoot: FootballSide
+
+  """List of informations about the penalties"""
+  penaltyScores: [PenaltyScore!]
+}
+
+type PenaltyShootoutIncident {
+  """Type of penalty shootout incident (see PenaltyShootoutIncidentType)"""
+  penaltyShootoutType: PenaltyShootoutIncidentType!
+
+  """Team side"""
+  side: FootballSide!
+
+  """Player involved in the incident"""
+  player: FootballPlayer
+}
+
+enum PenaltyShootoutIncidentType {
+  SCORED
+  MISSED
+  CANCELLED
+  FIRST_TEAM_TO_SHOOT
+}
+
+enum PenaltyStatus {
+  SCORE
+  MISS
+}
+
+input PeriodDetails {
+  """The type of period"""
+  period: FootballPeriod
+
+  """Status of the period"""
+  periodStatus: FootballPeriodStatus
+}
+
+type PeriodIncident {
+  """Period type (see Period incident type)"""
+  periodType: PeriodIncidentType!
+
+  """Type of period"""
+  period: FootballPeriod
+
+  """The status of the period being played"""
+  status: FootballPeriodStatus!
+
+  """Minutes of injury time"""
+  injuryTime: Int
+}
+
+enum PeriodIncidentType {
+  PERIOD_TRANSITION
+  INJURY_TIME_UPDATE
+}
+
+enum PositionStatus {
+  BROUGHT_DOWN
+  CARRIED_OUT
+  DISQUALIFIED
+  FELL
+  PULLED_UP
+  REFUSED
+  RAN_OUT
+  REFUSED_TO_RACE
+  SLIPPED_UP
+  UNSEATED_RIDER
+  WALKOVER
+  DEADHEAT
+  DID_NOT_FINISH
+}
+
+type Query {
+  football: Football
+  horseRacing: HorseRacing
+  greyhounds: Greyhounds
+  tennis: Tennis
+  darts: Darts
+  iceHockey: IceHockey
+  basketball: Basketball
+  cricket: Cricket
+  rugbyUnion: RugbyUnion
+  tableTennis: TableTennis
+  americanFootball: AmericanFootball
+
+  """Get a list of broadcaster for the chosen ids"""
+  broadcasts(ids: [ID!]!): [Broadcasts]
+  country(codes: [String!]!): [Country]
+}
+
+type Race {
+  """Unique identifier for the race"""
+  id: ID!
+
+  """Details information for the race"""
+  details: RaceDetails!
+
+  """Analyst pre-race predictions for the race"""
+  verdict: String
+
+  """List of runners in the race"""
+  runners(ids: [ID!]): [Runner]
+
+  """Meeting information this race is part off"""
+  meeting: Meeting!
+
+  """The finishing time of the winner of the race in seconds"""
+  winningTime: Float
+}
+
+type RaceConditions {
+  """The maximum age eligibility of the race"""
+  eligibilityAgeMax: String
+
+  """The minimum age eligibility of the race"""
+  eligibilityAgeMin: String
+
+  """Details of a sex limit on the race"""
+  eligibilitySexLimit: String
+
+  """
+  For handicap races the upper handicap mark for a horse to qualify to run
+  """
+  ratingLimitUpper: Int
+
+  """
+  For handicap races the lower handicap mark for a horse to qualify to run
+  """
+  ratingLimitLower: Int
+}
+
+type RaceDetails {
+  """The short name of the race, if available, otherwise the race name"""
+  name: String!
+
+  """The short name of the race"""
+  shortName: String
+
+  """The number of the race"""
+  number: Int!
+
+  """The time that the race was due to start at GMT"""
+  scheduledTime: DateTime!
+
+  """The class of the race"""
+  raceClass: Int
+
+  """The type of racing of the race"""
+  type: RaceType
+
+  """The going of the race"""
+  going: Going
+
+  """The going code of the race"""
+  goingCode: String
+
+  """The type of surface that is runned on the race"""
+  surface: Surface
+
+  """The race distance"""
+  distance: Distance!
+
+  """Total prize fund of the race"""
+  prizeMoney: Int
+
+  """The number of runners either currently entered or that ran in the race"""
+  numberOfRunners: Int!
+
+  """The race conditions"""
+  conditions: RaceConditions
+
+  """The current status of the race"""
+  status: RaceStatus
+
+  """Type of Race Result Available"""
+  resultType: RaceResultType
+
+  """Timeform Cashout Hints"""
+  timeformCashOutHints: String
+}
+
+enum RaceResultType {
+  QUICK_RESULT
+  FULL_RESULT
+}
+
+enum RaceStatus {
+  DORMANT
+  DELAYED
+  PARADING
+  GOING_DOWN
+  GOING_BEHIND
+  AT_THE_POST
+  UNDER_ORDERS
+  OFF
+  FINISHED
+  FALSE_START
+  PHOTOGRAPH
+  RESULT
+  WEIGHED_IN
+  RACE_VOID
+  ABANDONED
+}
+
+enum RaceType {
+  FLAT
+  HURDLE
+  CHASE
+  BUMPER
+}
+
+type RelativeFixtureResult {
+  """Competition description"""
+  competition: String
+
+  """Oponent description"""
+  opponent: String!
+
+  """The score of the fixture"""
+  score: FootballScore!
+
+  """The score of the fixture in the first half"""
+  firstHalfScore: FootballScore
+
+  """The score of the fixture in the extra time (only if it happened)"""
+  extraTimeScore: FootballScore
+
+  """The score of the fixture in the penalty shootout (only if it happened)"""
+  penaltyShootoutScore: FootballScore
+
+  """Outcome of the fixture related to the team"""
+  outcome: FootballOutcome!
+
+  """The date that the fixture starts"""
+  startAt: DateTime!
+
+  """The side of the team (Home or Away)"""
+  side: FootballSide!
+}
+
+type RugbyUnion {
+  """Get a list of Rugby Union fixtures information for the chosen ids"""
+  fixture(ids: [ID!]!): [RugbyUnionFixture]
+}
+
+type RugbyUnionFixture {
+  """Canonical ID of the match"""
+  id: ID!
+
+  """Score of the current period"""
+  score: RugbyUnionScore
+
+  """Score at half time"""
+  halfTimeScore: RugbyUnionScore
+}
+
+type RugbyUnionScore {
+  """Home team score"""
+  home: Int!
+
+  """Away team score"""
+  away: Int!
+}
+
+type Runner {
+  """Unique identifier for the race"""
+  id: ID!
+
+  """Details information for the runner"""
+  details: RunnerDetails!
+
+  """Analyst's comment for the horse's chance in the race"""
+  comments: String
+
+  """Number of days since the horse had its last run"""
+  daysOff: Int
+
+  """123 selection by analysts"""
+  rating123: Int!
+
+  """
+  The number of stars attributed to the horses chances by the analyst. 5 best chance, 1 least chance of winning.
+  """
+  ratingStars: Int!
+
+  """The horse's official handicap mark"""
+  rating: Int
+
+  """The runner past form over the last two seasons in summary"""
+  form: String
+
+  """The number of times this horse has won at this course"""
+  winsAtCourse: Int
+
+  """The number of times this horse has won at this distance"""
+  winsAtDistance: Int
+
+  """The number of times a horse has won at this course and distance"""
+  winsAtCourseDistance: Int
+
+  """The entry status of the horse"""
+  status: RunnerStatus
+
+  """Information about the horse"""
+  horse: Horse!
+
+  """The predicted early position figure based on past performances"""
+  preRaceEpf: Float
+
+  """Value will be zero if there is no rating available"""
+  preRaceAdjustedRating: Int
+
+  """
+  Characters denoting if the horse has previously won at this distance(D), course(C) or was a beaten favourite(BF). May be multiple qualifiers.
+  """
+  crsDisWinFavText: String
+
+  """Indicates if the horse is a positive horses for courses for this race"""
+  horsesForCoursePos: Int
+
+  """Indicates if the horse is a jockey uplift for this race"""
+  jockeyUplift: Int
+
+  """Indicates if the horse is a trainer uplift for this race"""
+  trainerUplift: Int
+
+  """Indicates if the horse was a hot trainer for this race"""
+  hotTrainer: Int
+
+  """Indicates if the horse was a cold trainer for this race"""
+  coldTrainer: Int
+
+  """
+  Indicates the horse is of particular interest based on its recent sectional times
+  """
+  sectionalFlag: Boolean
+
+  """Indicates if the horse is a Warning Horse for this race"""
+  warningHorse: Int
+
+  """Betfair Sportsbook decimal odds"""
+  sportsbookDecimalOdds: String
+}
+
+type RunnerDetails {
+  """The full name of the jockey booked to ride the horse"""
+  jockeyName: String
+
+  """The full name of the trainer of the horse"""
+  trainerName: String
+
+  """The number the horse will carry on its saddle cloth in the race"""
+  saddleCloth: String!
+
+  """Url for the jockey silks"""
+  silk: Url
+
+  """
+  The number of stall the horse will start from (0 for jump races and pre declaration stage)
+  """
+  draw: Int
+
+  """The weight the horse is set to carry """
+  weight: Weight
+
+  """The full description of any headgear the horse may be wearing"""
+  equipmentDescription: String
+}
+
+enum RunnerStatus {
+  RUNNER
+  NON_RUNNER
+  WITHDRAWN
+  RESERVE
+  DROPPED_OUT_AT_FIVE_DAY
+  DROPPED_OUT_AT_FOUR_DAY
+  DROPPED_OUT_AT_OVERNIGHT
+  DROPPED_OUT_DURING_EARLY_CLOSERS
+  RACE_ABANDONED
+  MAIN_TRACK_ONLY
+  ALSO_ELIGIBLE
+}
+
+type SetPieceIncident {
+  """Set piece type (See SetPieceIncidentType)"""
+  setPieceType: SetPieceIncidentType!
+
+  """Team side"""
+  side: FootballSide!
+}
+
+enum SetPieceIncidentType {
+  CORNER
+  THROW_IN
+  GOAL_KICK
+  FREE_KICK
+}
+
+type ShotIncident {
+  """Shot type (See ShotIncidenType)"""
+  shotType: ShotIncidentType!
+
+  """Team side"""
+  side: FootballSide!
+
+  """Player involved in the incident"""
+  player: FootballPlayer
+}
+
+enum ShotIncidentType {
+  OFF_TARGET
+  OFF_TARGET_BLOCKED
+  SAVED
+  SAVED_BLOCKED
+}
+
+enum StatsToggle {
+  show
+  hide
+}
+
+enum Status {
+  PRE_MATCH
+  IN_RUNNING
+  FINISHED
+  SUSPENDED
+  POSTPONED
+}
+
+type SubstitutionIncident {
+  """Team side"""
+  side: FootballSide!
+
+  """Player In"""
+  playerIn: FootballPlayer
+
+  """Player Out"""
+  playerOut: FootballPlayer
+}
+
+enum Surface {
+  TURF
+  ALL_WEATHER
+  DIRT
+  SAND
+}
+
+type TableTennis {
+  """Get a list of Table Tennis fixtures information for the chosen ids"""
+  fixture(ids: [ID!]!): [TableTennisFixture]
+}
+
+type TableTennisFixture {
+  """Canonical ID of the match"""
+  id: ID!
+
+  """Current Set Information"""
+  currentSet: TableTennisSet!
+
+  """NUmber of sets each player has won in this match"""
+  setsWon: TableTennisScore!
+
+  """ordered set information (from recent to least recent) """
+  previousSets: [TableTennisSet]
+}
+
+type TableTennisScore {
+  """Home team score"""
+  home: Int!
+
+  """Away team score"""
+  away: Int!
+}
+
+type TableTennisSet {
+  """Number of the set"""
+  number: Int!
+
+  """Score of the set"""
+  score: TableTennisScore!
+
+  """Current Server (only for current set)"""
+  currentServer: TeamSide
+}
+
+enum TeamSide {
+  HOME
+  AWAY
+}
+
+type Tennis {
+  """Get a list of Match information for the chosen ids"""
+  match(ids: [ID!]!): [TennisMatch]
+}
+
+type TennisGame {
+  """type of the game - normal game or tiebreak"""
+  type: TennisGameType!
+
+  """number of the game"""
+  number: Int!
+
+  """game score for team A"""
+  teamAScore: String!
+
+  """game score  for team B"""
+  teamBScore: String!
+
+  """number of the point"""
+  pointNumber: Int
+
+  """participant that serves the current point"""
+  teamServing: TeamSide
+
+  """current point winner"""
+  pointWinner: TeamSide
+
+  """current serve number"""
+  serveNumber: Int
+}
+
+type TennisGameStats {
+  """number of aces"""
+  aces: Int!
+
+  """number of double faults"""
+  doubleFaults: Int!
+
+  """percentage of first serves won"""
+  firstServes: Int!
+
+  """percentage of break point conversions won"""
+  breakPointConversionPoints: Int!
+
+  """number of first services won"""
+  firstServicesWon: Int!
+
+  """number of second services won"""
+  secondServicesWon: Int!
+
+  """number of total services won"""
+  totalServicesWon: Int!
+
+  """number of first service return points won"""
+  firstServiceReturnPointsWon: Int!
+
+  """number of second service return points won"""
+  secondServiceReturnPointsWon: Int!
+
+  """number of total service return points won"""
+  totalServiceReturnPointsWon: Int!
+}
+
+enum TennisGameType {
+  NORMAL
+  TIEBREAK
+}
+
+type TennisMatch {
+  """Betfair Id for the match"""
+  id: ID!
+
+  """sheduled start time"""
+  scheduledStartTime: DateTime!
+
+  """start time of the match"""
+  actualStartTime: DateTime
+
+  """type of the match"""
+  type: TennisMatchType!
+
+  """match gender"""
+  gender: TennisMatchGender
+
+  """surface of the match"""
+  surface: TennisMatchSurface
+
+  """players for team A"""
+  teamA: TennisTeam
+
+  """players for team B"""
+  teamB: TennisTeam
+
+  """status of the current match"""
+  status: TennisMatchStatus
+
+  """elapsed time since the beginning of the match"""
+  duration: Int
+
+  """number of sets for this match (1,3,5)"""
+  numberOfSets: Int
+
+  """current set being played"""
+  currentSet: TennisSet
+
+  """ordered set information (from recent to least recent) """
+  previousSets: [TennisSet]
+
+  """set score for team A"""
+  teamAScore: Int
+
+  """set score for team B"""
+  teamBScore: Int
+
+  """match statistics"""
+  stats: TennisStats
+}
+
+enum TennisMatchGender {
+  MALE
+  FEMALE
+  MIXED
+}
+
+type TennisMatchStatus {
+  status: TennisStatus!
+  reason: TennisStatusReason
+}
+
+enum TennisMatchSurface {
+  CLAY
+  HARD
+  INDOOR_HARD
+  GRASS
+}
+
+enum TennisMatchType {
+  SINGLES
+  DOUBLES
+}
+
+type TennisPlayer {
+  """player name"""
+  name: String!
+
+  """player rank"""
+  rank: Int
+}
+
+type TennisSet {
+  """number of the set"""
+  number: Int!
+
+  """current tennis game - null if tennis is in the past"""
+  currentGame: TennisGame
+
+  """ordered game (from most recent to least)"""
+  previousGames: [TennisGame]
+
+  """game score for team A on this set"""
+  teamAScore: Int!
+
+  """game score for team B on this set"""
+  teamBScore: Int!
+
+  """set duration - elapsed time of the set"""
+  duration: Int
+}
+
+enum TennisSetFormat {
+  NORMAL_WITH_TIEBREAK
+  AUSTRALIAN_OPEN
+  RACE_SET
+  ADVANTAGE_SET
+  WIMBLEDON_TIEBREAK
+  TIEBREAK_TENS
+}
+
+type TennisSetStats {
+  """number of the set"""
+  number: Int!
+
+  """set stats for the teams"""
+  teamsStats: TennisTeamsStats!
+}
+
+type TennisStats {
+  """"match stats for the teams"""
+  teamsStats: TennisTeamsStats!
+
+  """match sets stats"""
+  setsStats: [TennisSetStats!]!
+}
+
+enum TennisStatus {
+  PRE_MATCH
+
+  """STARTING"""
+  IN_RUNNING
+  INTERRUPTED
+  FINISHED
+}
+
+enum TennisStatusReason {
+  """finished reasons:"""
+  FINISHED
+  RETIREMENT
+  DISQUALIFICATION
+
+  """interrupt reasons:"""
+  RAIN_DELAY
+  HEAT_DELAY
+  ON_COURT_COACHING
+  TOILET_BREAK
+}
+
+type TennisTeam {
+  players: [TennisPlayer]
+  side: TeamSide
+}
+
+type TennisTeamsStats {
+  """"aggregated stats"""
+  aggregatedStats: TennisGameStats!
+
+  """stats for team A"""
+  teamAStats: TennisGameStats!
+
+  """stats for team B"""
+  teamBStats: TennisGameStats!
+}
+
+"""A Url scalar"""
+scalar Url
+
+type Weight {
+  """Weight in kilograms"""
+  kilograms: Float!
+
+  """Weight in pounds"""
+  pounds: Float!
+
+  """"Weight in stones"""
+  stones: String!
+}

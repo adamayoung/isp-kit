@@ -14,13 +14,15 @@ let package = Package(
         .library(name: "Sportsbook", targets: ["Sportsbook"]),
         .library(name: "SCAN", targets: ["SCAN"]),
         .library(name: "SMP", targets: ["SMP"]),
+        .library(name: "SCA", targets: ["SCA"]),
         .library(name: "CMS", targets: ["CMS"])
     ],
 
     dependencies: [
         .package(url: "https://github.com/swift-server/async-http-client.git", from: "1.13.0"),
         .package(url: "https://github.com/apple/swift-nio.git", from: "2.42.0"),
-        .package(url: "https://github.com/apple/swift-log.git", from: "1.4.0")
+        .package(url: "https://github.com/apple/swift-log.git", from: "1.4.0"),
+        .package(url: "https://github.com/apollographql/apollo-ios.git", exact: "1.0.3")
     ],
 
     targets: [
@@ -29,6 +31,7 @@ let package = Package(
             dependencies: [
                 "SCAN",
                 "SMP",
+                "SCA",
                 "CMS",
                 .product(name: "AsyncHTTPClient", package: "async-http-client"),
                 .product(name: "Logging", package: "swift-log")
@@ -66,6 +69,24 @@ let package = Package(
             name: "SMPTests",
             dependencies: [
                 "SMP"
+            ]
+        ),
+
+        .target(
+            name: "SCA",
+            dependencies: [
+                "GBPCore",
+                .product(name: "Apollo", package: "apollo-ios"),
+                .product(name: "Logging", package: "swift-log")
+            ],
+            exclude: [
+                "Resources"
+            ]
+        ),
+        .testTarget(
+            name: "SCATests",
+            dependencies: [
+                "SCA"
             ]
         ),
 

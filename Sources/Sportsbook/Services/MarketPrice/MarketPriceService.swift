@@ -20,7 +20,7 @@ public final class MarketPriceService {
     }
 
     public func find(forMarket marketID: Market.ID, locale: Locale = .current) async throws -> MarketPrice? {
-        logger.debug("Fetching Market Price", metadata: ["marketID": .stringConvertible(marketID)])
+        logger.debug("Fetching Market Price.", metadata: ["market-ids": .string(marketID)])
 
         let request = MarketPricesRequest(marketID: marketID, locale: locale)
         guard let marketDetails = try await smp.marketPrices(request).first else {
@@ -33,9 +33,7 @@ public final class MarketPriceService {
     }
 
     public  func find(forMarkets marketIDs: [Market.ID], locale: Locale = .current) async throws -> [MarketPrice] {
-        logger.debug("Fetching Market Prices", metadata: [
-            "marketIDs": .stringConvertible(marketIDs.joined(separator: ", "))
-        ])
+        logger.debug("Fetching Market Prices.", metadata: ["market-ids": .string(marketIDs.joined(separator: ", "))])
 
         let request = MarketPricesRequest(marketIDs: marketIDs, locale: locale)
         let marketDetails = try await smp.marketPrices(request)

@@ -23,28 +23,44 @@ public final class MenuItemService {
         self.logger = logger
     }
 
-    public func featured(locale: Locale) async throws -> [MenuItem] {
-        logger.debug("Fetching featured")
+    public func featured(locale: Locale = .current) async throws -> [MenuItem] {
+        logger.debug("Fetching featured Menu Items.")
 
         let nodes = try await cms.nodes(.featuredMenuItems(locale: locale))
 
         return try await mapToMenuItems(nodes, locale: locale)
     }
 
-    public func popular(locale: Locale) async throws -> [MenuItem] {
-        logger.debug("Fetching popular")
+    public func popular(locale: Locale = .current) async throws -> [MenuItem] {
+        logger.debug("Fetching popular Menu Items.")
 
         let nodes = try await cms.nodes(.popularMenuItems(locale: locale))
 
         return try await mapToMenuItems(nodes, locale: locale)
     }
 
-    public func aToZ(locale: Locale) async throws -> [MenuItem] {
-        logger.debug("Fetching A to Z")
+    public func aToZ(locale: Locale = .current) async throws -> [MenuItem] {
+        logger.debug("Fetching A to Z Menu Items.")
 
         let nodes = try await cms.nodes(.aToZMenuItems(locale: locale))
 
         return try await mapToMenuItems(nodes, locale: locale)
+    }
+
+    public func menuItemCollection(locale: Locale = .current) async throws -> [MenuItemGroup] {
+        logger.debug("Fetching Menu Item collection.")
+
+        async let featured = self.featured(locale: locale)
+        async let popular = self.popular(locale: locale)
+        async let aToZ = self.aToZ(locale: locale)
+
+        let menuItemGroups = [
+            MenuItemGroup(type: .featured, menuItems: try await featured),
+            MenuItemGroup(type: .popular, menuItems: try await popular),
+            MenuItemGroup(type: .aToZ, menuItems: try await aToZ)
+        ]
+
+        return menuItemGroups
     }
 
 }

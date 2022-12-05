@@ -7,7 +7,7 @@ final class SMPTests: XCTestCase {
     static var httpClient: HTTPClient!
 
     var smp: SMP!
-    var client: GBPClient!
+    var client: GBPHTTPClient!
 
     override class func setUp() {
         super.setUp()
@@ -30,7 +30,7 @@ final class SMPTests: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        client = GBPClient(
+        client = GBPHTTPClient(
             applicationID: EnvironmentVariable.applicationID,
             apiKey: EnvironmentVariable.apiKey,
             site: .uk,

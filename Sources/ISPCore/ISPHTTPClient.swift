@@ -5,7 +5,7 @@ import NIOCore
 import NIOFoundationCompat
 import NIOHTTP1
 
-open class ISPClient {
+open class ISPHTTPClient {
 
     private static let userAgent = "isp-kit"
 
@@ -53,7 +53,7 @@ open class ISPClient {
 
 }
 
-extension ISPClient {
+extension ISPHTTPClient {
 
     public func execute<Output: Decodable>(url: String, options: Options? = nil,
                                            locale: Locale = .current) async throws -> Output {
@@ -88,8 +88,9 @@ extension ISPClient {
         var request = request
         request.headers.add(contentsOf: defaultHeaders(requestURL: request.url, locale: locale))
 
-        logger.debug("\(request.method.rawValue) \(request.url)",
-                     metadata: ["headers": .stringConvertible(request.headers)])
+        logger.debug("\(request.method.rawValue) \(request.url).", metadata: [
+            "headers": .stringConvertible(request.headers)
+        ])
 
         let response: HTTPClientResponse
         do {
@@ -121,7 +122,7 @@ extension ISPClient {
 
 }
 
-extension ISPClient {
+extension ISPHTTPClient {
 
     private func defaultHeaders(requestURL: String, locale: Locale) -> HTTPHeaders {
         var headers = HTTPHeaders()

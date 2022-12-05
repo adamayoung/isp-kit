@@ -6,10 +6,10 @@ public final class PSA: AccountDataSource {
 
     private static let sessionPath = "/api/v1-preview/auth/session"
 
-    private let client: StarsClient
+    private let client: StarsHTTPClient
     private let logger: Logger
 
-    public init(client: StarsClient, logger: Logger = Logger(label: "isp-kit.psa")) {
+    public init(client: StarsHTTPClient, logger: Logger = Logger(label: "isp-kit.psa")) {
         self.client = client
         self.logger = logger
     }

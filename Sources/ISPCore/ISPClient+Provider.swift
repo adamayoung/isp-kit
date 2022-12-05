@@ -2,7 +2,7 @@ import AsyncHTTPClient
 import Foundation
 import NIOCore
 
-extension ISPClient {
+extension ISPHTTPClient {
 
     public enum HTTPClientProvider {
         case shared(HTTPClient)

@@ -20,7 +20,7 @@ public final class MarketService {
     }
 
     public func all(forEvent eventID: Event.ID, locale: Locale = .current) async throws -> [Market] {
-        logger.debug("Fetching Markets", metadata: ["event-id": .stringConvertible(eventID)])
+        logger.debug("Fetching Markets.", metadata: ["event-id": .stringConvertible(eventID)])
 
         let result = try await scan.search(.markets(forEvent: eventID, locale: locale))
         guard let marketAttachments = result.attachments.markets?.values else {
@@ -36,7 +36,7 @@ public final class MarketService {
     }
 
     public func all(forEvents eventIDs: [Event.ID], locale: Locale = .current) async throws -> [Event.ID: [Market]] {
-        logger.debug("Fetching Markets", metadata: ["event-ids": .stringConvertible(eventIDs)])
+        logger.debug("Fetching Markets.", metadata: ["event-ids": .stringConvertible(eventIDs)])
 
         let result = try await scan.search(.markets(forEvents: eventIDs, locale: locale))
         guard let marketAttachments = result.attachments.markets?.values else {
@@ -64,7 +64,7 @@ public final class MarketService {
     }
 
     public func find(withID id: Market.ID, locale: Locale = .current) async throws -> Market? {
-        logger.debug("Fetching Market", metadata: ["id": .stringConvertible(id)])
+        logger.debug("Fetching Market.", metadata: ["id": .stringConvertible(id)])
 
         let result = try await scan.search(.markets(withID: id, locale: locale))
         guard let marketAttachment = result.attachments.markets?.first?.value else {

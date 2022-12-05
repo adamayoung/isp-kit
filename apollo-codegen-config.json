@@ -1,0 +1,29 @@
+{
+  "schemaName" : "SCAScoreboards",
+  "input" : {
+    "operationSearchPaths" : [
+      "Sources/SCA/**/*.graphql"
+    ],
+    "schemaSearchPaths" : [
+      "Sources/SCA/**/*.graphqls"
+    ]
+  },
+  "output" : {
+    "testMocks" : {
+      "none" : {
+      }
+    },
+    "schemaTypes" : {
+      "path" : "./SCAScoreboards",
+      "moduleType" : {
+        "swiftPackageManager" : {
+        }
+      }
+    },
+    "operations" : {
+      "relative" : {
+          "subpath": "../Queries"
+      }
+    }
+  }
+}

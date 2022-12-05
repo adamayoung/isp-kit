@@ -1,0 +1,28 @@
+query Tennis($ids: [ID!]!) {
+  tennis {
+    match(ids: $ids) {
+      id
+      numberOfSets
+      status {
+        status
+        reason
+      }
+      previousSets {
+        teamAScore
+        teamBScore
+        number
+      }
+      currentSet {
+        number
+        teamAScore
+        teamBScore
+        currentGame {
+          teamAScore
+          teamBScore
+          teamServing
+          type
+        }
+      }
+    }
+  }
+}

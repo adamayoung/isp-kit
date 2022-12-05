@@ -4,5 +4,6 @@ public enum TLA: String {
 
     case scan
     case smp
+    case sca
 
 }

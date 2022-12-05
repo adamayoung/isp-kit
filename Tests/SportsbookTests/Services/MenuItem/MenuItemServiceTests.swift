@@ -1,13 +1,13 @@
 import AsyncHTTPClient
-import Logging
 @testable import Sportsbook
+import Logging
 import XCTest
 
-final class SportServiceTests: XCTestCase {
+final class MenuItemServiceTests: XCTestCase {
 
     static var httpClient: HTTPClient!
 
-    var sportService: SportService!
+    var menuItemService: MenuItemService!
     var scan: SCAN!
     var cms: CMS!
     var gbpClient: GBPHTTPClient!
@@ -52,11 +52,11 @@ final class SportServiceTests: XCTestCase {
         scan = SCAN(client: gbpClient)
         cms = CMS(client: cmsClient)
 
-        sportService = SportService(scan: scan, cms: cms, logger: Logger(label: "Test"))
+        menuItemService = MenuItemService(cms: cms, scan: scan, logger: Logger(label: "Test"))
     }
 
     override func tearDown() {
-        sportService = nil
+        menuItemService = nil
         cms = nil
         scan = nil
         cmsClient = nil
@@ -64,9 +64,36 @@ final class SportServiceTests: XCTestCase {
         super.tearDown()
     }
 
-    func testAll() async throws {
-        let sports = try await sportService.all(locale: .current)
-        XCTAssertGreaterThan(sports.count, 0)
+    func testFeatured() async throws {
+        let menuItems = try await menuItemService.featured()
+
+        print(menuItems)
+
+        XCTAssertGreaterThan(menuItems.count, 0)
+    }
+
+    func testPopular() async throws {
+        let menuItems = try await menuItemService.popular()
+
+        print(menuItems)
+
+        XCTAssertGreaterThan(menuItems.count, 0)
+    }
+
+    func testAToZ() async throws {
+        let menuItems = try await menuItemService.aToZ()
+
+        print(menuItems)
+
+        XCTAssertGreaterThan(menuItems.count, 0)
+    }
+
+    func testMenuItemCollection() async throws {
+        let menuItemGroups = try await menuItemService.menuItemCollection()
+
+        print(menuItemGroups)
+
+        XCTAssertGreaterThan(menuItemGroups.count, 0)
     }
 
 }

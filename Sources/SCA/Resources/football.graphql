@@ -1,0 +1,31 @@
+query Football($ids: [ID!]!) {
+  football {
+    fixture(ids: $ids) {
+      score {
+        home
+        away
+      }
+      duration {
+        period
+        status
+        clock {
+          minute
+          second
+          roundMinute
+        }
+        stoppageMinutes
+      }
+      penaltyShootout {
+        firstTeamToShoot
+        penaltyFormat
+        nextTeamToShoot
+        penaltyScores {
+          penaltyNumber
+          side
+          shotResult
+        }
+      }
+      id
+    }
+  }
+}

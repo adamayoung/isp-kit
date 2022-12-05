@@ -1,7 +1,7 @@
 import Foundation
 import NIOHTTP1
 
-extension ISPClient {
+extension ISPHTTPClient {
 
     public struct Options {
 

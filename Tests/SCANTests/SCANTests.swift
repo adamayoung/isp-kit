@@ -7,7 +7,7 @@ final class SCANTests: XCTestCase {
     static var httpClient: HTTPClient!
 
     var scan: SCAN!
-    var client: GBPClient!
+    var client: GBPHTTPClient!
 
     override class func setUp() {
         super.setUp()
@@ -30,7 +30,7 @@ final class SCANTests: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        client = GBPClient(
+        client = GBPHTTPClient(
             applicationID: EnvironmentVariable.applicationID,
             apiKey: EnvironmentVariable.apiKey,
             site: .uk,

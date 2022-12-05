@@ -3,7 +3,7 @@ import ISPCore
 import Logging
 import NIOHTTP1
 
-public final class StarsClient: ISPClient {
+public final class StarsHTTPClient: ISPHTTPClient {
 
     public let site: StarsSite
     public let environment: Environment

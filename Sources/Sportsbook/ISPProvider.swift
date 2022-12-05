@@ -29,7 +29,7 @@ public struct ISPProvider {
 
             let logger = Logger(label: "isp.Sportsbook")
 
-            let gbpClient = GBPClient(
+            let gbpClient = GBPHTTPClient(
                 applicationID: gbpApplicationID,
                 apiKey: gbpAPIKey,
                 site: site,
@@ -38,7 +38,7 @@ public struct ISPProvider {
                 logger: logger
             )
 
-            let cmsClient = CMSClient(
+            let cmsClient = CMSHTTPClient(
                 applicationID: cmsApplicationID,
                 apiKey: cmsAPIKey,
                 site: site,

@@ -7,7 +7,7 @@ final class CMSTests: XCTestCase {
     static var httpClient: HTTPClient!
 
     var cms: CMS!
-    var client: CMSClient!
+    var client: CMSHTTPClient!
 
     override class func setUp() {
         super.setUp()
@@ -30,7 +30,7 @@ final class CMSTests: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        client = CMSClient(
+        client = CMSHTTPClient(
             applicationID: EnvironmentVariable.applicationID,
             apiKey: EnvironmentVariable.apiKey,
             site: .uk,

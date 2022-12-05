@@ -3,7 +3,7 @@ import ISPCore
 import Logging
 import NIOHTTP1
 
-public final class CMSClient: ISPClient {
+public final class GBPHTTPClient: ISPHTTPClient {
 
     public let applicationID: String
     public let site: StarsSite
@@ -17,69 +17,55 @@ public final class CMSClient: ISPClient {
         site: StarsSite,
         environment: Environment,
         httpClientProvider: HTTPClientProvider,
-        logger: Logger = Logger(label: "isp-kit.cms-core.client")
+        logger: Logger = Logger(label: "isp-kit.gbp-core.client")
     ) {
         self.applicationID = applicationID
         self.apiKey = apiKey
         self.site = site
         self.environment = environment
-        super.init(httpClientProvider: httpClientProvider, logger: logger)
+        super.init(httpClientProvider: httpClientProvider, encoder: .gbp, decoder: .gbp, logger: logger)
     }
 
-    public func execute<Output: Decodable>(path: String, httpMethod: HTTPMethod = .GET,
+    public func execute<Output: Decodable>(path: String, tla: TLA, httpMethod: HTTPMethod = .GET,
                                            locale: Locale) async throws -> Output {
-        let baseURL = EndpointBase.value(for: environment)
-        let path = pathWithQueryItems(path, locale: locale)
-
+        let baseURL = EndpointBase.value(for: tla, environment: environment)
         let url = "\(baseURL)\(path)"
         let options = Options(method: httpMethod, headers: headers)
 
         return try await super.execute(url: url, options: options, locale: locale)
     }
 
-    public func execute<Input: Encodable, Output: Decodable>(path: String, httpMethod: HTTPMethod = .POST,
+    public func execute<Input: Encodable, Output: Decodable>(path: String, tla: TLA, httpMethod: HTTPMethod = .POST,
                                                              input: Input, locale: Locale) async throws -> Output {
-        let baseURL = EndpointBase.value(for: environment)
+        let baseURL = EndpointBase.value(for: tla, environment: environment)
         let url = "\(baseURL)\(path)"
         let options = Options(method: httpMethod, headers: headers)
 
         return try await super.execute(url: url, input: input, options: options, locale: locale)
     }
 
+    public func execute<Query: Encodable, Variables: Decodable, Output: Decodable>(
+        path: String, tla: TLA, request: GraphQLRequest<Query, Variables>, locale: Locale
+    ) async throws -> Output {
+        let baseURL = EndpointBase.value(for: tla, environment: environment)
+        let url = "\(baseURL)\(path)"
+        let options = Options(method: .POST, headers: headers)
+
+        return try await super.execute(url: url, input: request, options: options, locale: locale)
+    }
+
 }
 
-extension CMSClient {
+extension GBPHTTPClient {
 
     private var headers: HTTPHeaders {
         var headers = HTTPHeaders()
         headers.add(.applicationID, value: applicationID)
         headers.add(.starsSiteID, value: site.id)
-        headers.add(.cmsAPIKey, value: apiKey)
+        headers.add(.tlaAPIKey, value: apiKey)
+        headers.add(.ip, value: "91.211.98.36")
+        headers.add(.ips, value: "91.211.98.36")
         return headers
-    }
-
-    private func pathWithQueryItems(_ path: String, locale: Locale) -> String {
-        let queryItems = [
-            "site": site.code,
-            "country": site.countryCode,
-            "locale": locale.identifier
-        ]
-
-        let queryString = queryItems
-            .map { queryItem in
-                "\(queryItem.key)=\(queryItem.value)"
-            }
-            .joined(separator: "&")
-
-        var path = path
-        if !path.contains("?") {
-            path += "?"
-        } else {
-            path += "&"
-        }
-
-        path += queryString
-        return path
     }
 
 }

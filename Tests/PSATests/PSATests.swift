@@ -7,7 +7,7 @@ final class PSATests: XCTestCase {
     static var httpClient: HTTPClient!
 
     var psa: PSA!
-    var client: StarsClient!
+    var client: StarsHTTPClient!
 
     override class func setUp() {
         super.setUp()
@@ -30,7 +30,7 @@ final class PSATests: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        client = StarsClient(
+        client = StarsHTTPClient(
             site: .uk,
             environment: .qaCore,
             httpClientProvider: .shared(Self.httpClient)
