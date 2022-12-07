@@ -25,20 +25,14 @@ public struct ISPProvider {
             self.cms = cms
 
         case .createNew(let site, let environment, let gbpApplicationID, let gbpAPIKey, let cmsApplicationID,
-                        let cmsAPIKey):
-            let httpClient = HTTPClient(
-                eventLoopGroupProvider: .createNew,
-                configuration: .init(
-                    timeout: .init(connect: .seconds(10))
-                )
-            )
+                        let cmsAPIKey, let httpClientProvider):
 
             let gbpClient = GBPHTTPClient(
                 applicationID: gbpApplicationID,
                 apiKey: gbpAPIKey,
                 site: site,
                 environment: environment,
-                httpClientProvider: .shared(httpClient),
+                httpClientProvider: httpClientProvider,
                 logger: logger
             )
 
@@ -47,7 +41,7 @@ public struct ISPProvider {
                 apiKey: cmsAPIKey,
                 site: site,
                 environment: environment,
-                httpClientProvider: .shared(httpClient),
+                httpClientProvider: httpClientProvider,
                 logger: logger
             )
 

@@ -11,8 +11,10 @@ extension ISPProvider {
 
         case shared(scan: CatalogueDataSource, smp: MarketPricesDataSource, sib: SportsbookImplyBetsDataSource,
                     sca: SportsContentDataSource, cms: ContentManagementDataSource)
+
         case createNew(site: StarsSite, environment: Environment, gbpApplicationID: String, gbpAPIKey: String,
-                       cmsApplicationID: String, cmsAPIKey: String)
+                       cmsApplicationID: String, cmsAPIKey: String,
+                       httpClientProvider: ISPHTTPClient.HTTPClientProvider)
 
     }
 
