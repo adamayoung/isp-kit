@@ -1,6 +1,6 @@
 import Foundation
 
-public struct MenuItemGroup: Identifiable, Equatable {
+public struct MenuItemGroup: Identifiable, Equatable, Encodable {
 
     public var id: String { type.rawValue }
     public let type: MenuItemGroupType
@@ -15,10 +15,10 @@ public struct MenuItemGroup: Identifiable, Equatable {
 
 extension MenuItemGroup {
 
-    public enum MenuItemGroupType: String, Equatable {
-        case featured
-        case popular
-        case aToZ
+    public enum MenuItemGroupType: String, Equatable, Encodable {
+        case featured = "FEATURED"
+        case popular = "POPULAR"
+        case aToZ = "A_TO_Z"
     }
 
 }
