@@ -17,7 +17,6 @@ public final class SMP: MarketPricesDataSource {
     public func marketPrices(_ request: MarketPricesRequest) async throws -> [MarketDetails] {
         logger.debug("Fetching market prices from SMP.",
                      metadata: ["request": .stringConvertible(request)])
-        print("Fetching market prices from SMP \(request)")
 
         return try await client.execute(path: Self.marketPricesPath, tla: .smp, input: request, locale: request.locale)
     }

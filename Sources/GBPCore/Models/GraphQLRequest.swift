@@ -1,13 +1,25 @@
 import Foundation
 
-public struct GraphQLRequest<Query: Encodable, Variables: Encodable>: Encodable {
+public protocol GraphQLRequest: Encodable {
 
-    public let query: Query
-    public let variables: Variables
+    var query: String { get }
+    var variables: [String: [String]] { get }
 
-    public init(query: Query, variables: Variables) {
-        self.query = query
-        self.variables = variables
+}
+
+extension GraphQLRequest {
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: GraphQLRequestCodingKeys.self)
+        try container.encode(query, forKey: .query)
+        try container.encodeIfPresent(variables, forKey: .variables)
     }
+
+}
+
+private enum GraphQLRequestCodingKeys: String, CodingKey {
+
+    case query
+    case variables
 
 }

@@ -1,12 +1,12 @@
 import AsyncHTTPClient
-@testable import SCA
+@testable import SIB
 import XCTest
 
-final class SCATests: XCTestCase {
+final class SIBTests: XCTestCase {
 
     static var httpClient: HTTPClient!
 
-    var sca: SCA!
+    var sib: SIB!
     var client: GBPHTTPClient!
 
     override class func setUp() {
@@ -38,21 +38,31 @@ final class SCATests: XCTestCase {
             httpClientProvider: .shared(Self.httpClient)
         )
 
-        sca = SCA(client: client)
+        sib = SIB(client: client)
     }
 
     override func tearDown() {
-        sca = nil
+        sib = nil
         client = nil
         super.tearDown()
     }
 
-    func testScoreboardForFootballEvent() async throws {
-        let eventID = 31672776
+    func testImplyBetsReturnsResult() async throws {
+        let request = ImplyBetsRequest(
+            betLegs: [
+                BetLeg(
+                    betRunners: [
+                        BetLegRunner(
+                            runner: Runner(marketID: "501.25334285", selectionID: 69821)
+                        )
+                    ]
+                )
+            ]
+        )
 
-        let scoreboard = try await sca.scoreboard(forFootballEvent: eventID, locale: .current)
+        let result = try await sib.implyBets(request)
 
-        XCTAssertEqual(scoreboard?.id, String(eventID))
+        XCTAssertGreaterThan(result.betCombinations.count, 0)
     }
 
 }

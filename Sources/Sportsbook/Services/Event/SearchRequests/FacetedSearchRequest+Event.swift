@@ -91,8 +91,7 @@ extension FacetedSearchRequest {
                 )
             ),
             filter: FilterQuery(
-                marketIDs: [marketID],
-                maxResults: 0
+                marketIDs: [marketID]
             ),
             locale: locale
         )
@@ -104,8 +103,7 @@ extension FacetedSearchRequest {
                 type: .sport
             ),
             filter: FilterQuery(
-                competitionIDs: [competitionID],
-                maxResults: 0
+                competitionIDs: [competitionID]
             ),
             locale: locale
         )

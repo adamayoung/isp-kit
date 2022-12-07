@@ -83,7 +83,7 @@ extension MarketType {
         .rugbyLeague: [.matchBetting],
         .rugbyUnion: [.matchBetting],
         .snooker: [.snookerMatchBetting, .winDrawWin, .handicapBetting],
-        .soccer: [.winDrawWin, .extraTimeBetting, .toLiftTheCup, .toQualifyInNormalTime, .toQualifyForTheNextRound],
+        .football: [.winDrawWin, .extraTimeBetting, .toLiftTheCup, .toQualifyInNormalTime, .toQualifyForTheNextRound],
         .specialBets: [.winner],
         .squash: [.matchBetting],
         .tableTennis: [.matchBetting],

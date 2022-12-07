@@ -12,8 +12,7 @@ extension FacetedSearchRequest {
             ],
             filter: FilterQuery(
                 sportIDs: sportIDs,
-                competitionIDs: competitionIDs,
-                maxResults: 0
+                competitionIDs: competitionIDs
             ),
             locale: locale
         )

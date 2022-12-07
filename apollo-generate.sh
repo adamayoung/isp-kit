@@ -1,1 +1,0 @@
-swift package --allow-writing-to-package-directory apollo-generate

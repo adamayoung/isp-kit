@@ -11,8 +11,7 @@ extension FacetedSearchRequest {
             ),
             filter: FilterQuery(
                 sportIDs: [sportID],
-                selectBy: .firstToStart,
-                maxResults: 0
+                selectBy: .firstToStart
             ),
             locale: locale
         )
@@ -33,8 +32,7 @@ extension FacetedSearchRequest {
         .init(
             facet: Facet(type: .competition),
             filter: FilterQuery(
-                competitionIDs: competitionIDs,
-                maxResults: 0
+                competitionIDs: competitionIDs
             ),
             locale: locale
         )

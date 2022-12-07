@@ -18,8 +18,7 @@ extension FacetedSearchRequest {
         .init(
             facet: Facet(type: .sport),
             filter: FilterQuery(
-                sportIDs: ids,
-                maxResults: 0
+                sportIDs: ids
             ),
             locale: locale
         )
@@ -29,8 +28,7 @@ extension FacetedSearchRequest {
         .init(
             facet: Facet(type: .sport),
             filter: FilterQuery(
-                productTypes: [.sportsbook],
-                maxResults: 0
+                productTypes: [.sportsbook]
             ),
             locale: locale
         )
@@ -40,8 +38,7 @@ extension FacetedSearchRequest {
         .init(
             facet: Facet(type: .sport),
             filter: FilterQuery(
-                competitionIDs: [competitionID],
-                maxResults: 0
+                competitionIDs: [competitionID]
             ),
             locale: locale
         )
@@ -51,8 +48,7 @@ extension FacetedSearchRequest {
         .init(
             facet: Facet(type: .sport),
             filter: FilterQuery(
-                eventIDs: [eventID],
-                maxResults: 0
+                eventIDs: [eventID]
             ),
             locale: locale
         )

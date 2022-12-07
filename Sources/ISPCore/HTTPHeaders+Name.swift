@@ -27,6 +27,7 @@ extension HTTPHeaders {
 
         public static let applicationID = Name("X-Application")
         public static let starsSiteID = Name("X-Stars-Site")
+        public static let authentication = Name("X-Authentication")
 
     }
 

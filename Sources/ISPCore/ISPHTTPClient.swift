@@ -55,8 +55,9 @@ open class ISPHTTPClient {
 
 extension ISPHTTPClient {
 
-    public func execute<Output: Decodable>(url: String, options: Options? = nil,
-                                           locale: Locale = .current) async throws -> Output {
+    public func execute<Output: Decodable>(
+        url: String, options: Options? = nil, locale: Locale = .current
+    ) async throws -> Output {
         let options = options ?? Options(method: .GET)
         var request = HTTPClientRequest(url: url)
         request.method = options.method

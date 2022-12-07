@@ -47,7 +47,7 @@ extension Int {
     static let politics = 2378961
     static let rowing = 12
     static let shooting = 28609007
-    static let soccer = 1
+    static let football = 1
     static let specialBets = 10
     static let squash = 4609466
     static let snooker = 6422

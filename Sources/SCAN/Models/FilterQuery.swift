@@ -40,7 +40,7 @@ public struct FilterQuery: Equatable, Hashable, Codable {
                 inPlayOnly: Bool? = nil, sgmOnly: Bool? = nil, marketBettingTypes: [MarketBettingType]? = nil,
                 marketCountries: [CountryCode]? = nil, marketTypeCodes: [String]? = nil, venues: [String]? = nil,
                 marketStartingAfter: Date? = nil, marketStartingBefore: Date? = nil, contentGroup: ContentGroup? = nil,
-                selectBy: FacetSelectBy? = nil, startRecord: Int? = nil, maxResults: Int? = nil,
+                selectBy: FacetSelectBy? = nil, startRecord: Int? = nil, maxResults: Int = 0,
                 attachments: [AttachmentType]? = nil, meetingIDs: [MeetingID]? = nil, raceIDs: [RaceID]? = nil,
                 marketLevels: [MarketLevel]? = nil, upperLevelEventIDs: [EventID]? = nil, videoAvailable: Bool? = nil,
                 onTV: Bool? = nil, tradedVolumeFrom: Int? = nil, raceClasses: [String]? = nil,

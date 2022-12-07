@@ -14,10 +14,17 @@ public final class SCA: SportsContentDataSource {
         self.logger = logger
     }
 
-//    public func scoreboard(forFootballEvent eventID: Int) async throws -> FootballScoreboardResult? {
-//        logger.debug("Fetching Football Scoreboard.", metadata: ["event-id": .stringConvertible(eventID)])
-//
-//        return try await client.execute(path: Self.searchPath, tla: .sca, input: request, locale: request.locale)
-//    }
+    public func scoreboards(forFootballEvents eventIDs: [Int],
+                           locale: Locale = .current) async throws -> [FootballScoreboard] {
+        logger.debug("Fetching Football Scoreboards.", metadata: ["event-ids": .stringConvertible(eventIDs)])
+
+        let request = FootballScoreboardRequest(eventIDs: eventIDs)
+
+        let result: GraphQLResult<FootballScoreboardGraphQLResult>? = try? await client.execute(
+            path: Self.graphQLPath, tla: .sca, input: request, locale: locale
+        )
+
+        return result?.data.football.fixture ?? []
+    }
 
 }
