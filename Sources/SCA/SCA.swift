@@ -15,7 +15,7 @@ public final class SCA: SportsContentDataSource {
     }
 
     public func scoreboards(forFootballEvents eventIDs: [Int],
-                           locale: Locale = .current) async throws -> [FootballScoreboard] {
+                            locale: Locale = .current) async throws -> [FootballScoreboard] {
         logger.debug("Fetching Football Scoreboards.", metadata: ["event-ids": .stringConvertible(eventIDs)])
 
         let request = FootballScoreboardRequest(eventIDs: eventIDs)

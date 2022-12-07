@@ -1,6 +1,6 @@
 import AsyncHTTPClient
-@testable import Sportsbook
 import Logging
+@testable import Sportsbook
 import XCTest
 
 final class MenuItemServiceTests: XCTestCase {

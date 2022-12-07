@@ -25,6 +25,7 @@ identifier_name:
     - all
     - avb
     - cms
+    - end
     - gbp
     - id
     - ids
@@ -35,6 +36,8 @@ identifier_name:
     - pin
     - psa
     - rhs
+    - sca
+    - sib
     - smp
     - tag
     - tla

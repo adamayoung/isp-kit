@@ -6,7 +6,6 @@ public struct FootballScoreboard: Identifiable, Decodable {
     public let score: FootballScoreboardScore?
     public let duration: FootballScoreboardDuration?
 
-
 }
 
 public typealias SCAFootballScoreboard = FootballScoreboard

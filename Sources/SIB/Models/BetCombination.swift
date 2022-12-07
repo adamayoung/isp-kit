@@ -10,7 +10,6 @@ public struct BetCombination: Decodable {
     public let averageOdds: Decimal
     public let winAverageOdds: Decimal
 
-
 }
 
 extension BetCombination {
